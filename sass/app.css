@@ -164,6 +164,19 @@
 .newfile, #controls .note-title-form .newgroupinput {
   display: none; }
 
+#controls .autosave {
+  font-size: 16px;
+  line-height: 44px;
+  height: 44px;
+  padding-right: 15px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s linear; }
+  #controls .autosave.shown {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s linear; }
+
 .fileinput {
   width: 80pt;
   height: 36px;

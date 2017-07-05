@@ -1,20 +1,23 @@
 <div id="ownnote">
 	<div id="controls">
-		<div id="newfile" class="indent">
-			<form id="editform" class="note-title-form">
-				Name:
-				<input type="text" class="fileinput" ng-model="noteShadowCopy.title">
-				&nbsp;&nbsp;
-				Group:
-				<select id="groupname" ng-model="noteShadowCopy.grouping">
-					<option value="">Not grouped</option>
-					<option value="_new">New group</option>
-				</select>
-				<input type="text" placeholder="group title">
-				<div id="save" class="button">Save</div>
-				<div id="canceledit" class="button" ng-click="cancelEdit()">Cancel</div>
-			</form>
-		</div>
+		<span id="newfile" class="indent">
+
+			Name:
+			<input type="text" class="fileinput" ng-model="noteShadowCopy.title">
+			&nbsp;&nbsp;
+			Group:
+			<select id="groupname" ng-model="noteShadowCopy.grouping">
+				<option value="">Not grouped</option>
+				<option value="_new">New group</option>
+			</select>
+			<input type="text" placeholder="group title">
+			<div id="save" class="button">Save</div>
+			<div id="canceledit" class="button" ng-click="cancelEdit()">Cancel</div>
+
+			<div class="pull-right autosave">
+				Note auto saved!
+			</div>
+		</span>
 	</div>
 	<div class="listingBlank"><!-- --></div>
 

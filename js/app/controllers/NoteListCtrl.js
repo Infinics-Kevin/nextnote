@@ -34,7 +34,11 @@
 		.controller('NoteListCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
 			$scope.editNote = function (note) {
 				$location.path('/note/edit/' + note.id)
-			}
+			};
+
+			$scope.newNote = function (note) {
+				$location.path('/note/new')
+			};
 		}]);
 
 }());

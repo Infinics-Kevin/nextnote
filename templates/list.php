@@ -51,6 +51,7 @@ script('ownnote', 'app/factory/NoteFactory');
 \OCP\Util::addStyle('core', 'icons');
 
 
+
 /*build-css-start*/
 style('ownnote', 'app');
 /*build-css-end*/

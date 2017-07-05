@@ -61,6 +61,13 @@
 			$rootScope.$broadcast('nextnotes_notes_loaded');
 			$rootScope.keys = Object.keys;
 
+			// Fix nextcloud's behaviour because templates are injected with JS.
+			$rootScope.$on('$viewContentLoaded', function () {
+				$(window).trigger('resize');
+			});
+			$(window).trigger('resize');
+
+
 			//Setup locale data
 			$rootScope.dateFormat = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y');
 			$rootScope.dateFormatLong = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y') + ' H:mm';
