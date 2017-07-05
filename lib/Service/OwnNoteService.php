@@ -100,7 +100,7 @@ class OwnNoteService {
 
 		if (is_array($note)) {
 			$entity = $this->find($note['id']);
-			$entity->setName($note['name']);
+			$entity->setName($note['title']);
 			$entity->setGrouping($note['group']);
 			$entity->setNote($note['note']);
 			$entity->setMtime(time());

@@ -14,13 +14,12 @@
 			<div id="save" class="button">Save</div>
 			<div id="canceledit" class="button" ng-click="cancelEdit()">Cancel</div>
 
-			<div class="pull-right autosave">
-				Note auto saved!
+			<div class="pull-right autosave" ng-class="{'shown': autoSaved }">
+				Note saved!
 			</div>
 		</span>
 	</div>
 	<div class="listingBlank"><!-- --></div>
-
 	<textarea ui-tinymce="tinymceOptions" ng-model="noteShadowCopy.content">
 
 	</textarea>

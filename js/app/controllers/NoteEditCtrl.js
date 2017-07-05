@@ -31,8 +31,13 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('NextNotesApp')
-		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', function ($scope, $rootScope, NoteService, $routeParams, $location) {
-			$scope.noteShadowCopy = '';
+		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', '$timeout', function ($scope, $rootScope, NoteService, $routeParams, $location, $timeout) {
+			$scope.noteShadowCopy = {
+				title: '',
+				content: ''
+			};
+
+
 
 			var noteId = ($routeParams.noteId) ? $routeParams.noteId : null;
 			if (noteId) {
@@ -62,12 +67,54 @@
 				width: '100%',
 				height: h - 140,
 				autoresize_min_height: h - 140,
-				autoresize_max_height: h - 140,
+				autoresize_max_height: h - 140
 			};
+
+			$scope.autoSaved = false;
+			$scope.saveNote = function (autoSave) {
+				$scope.noteShadowCopy.noteTitle = angular.copy($scope.noteShadowCopy.title)
+				if(!$scope.noteShadowCopy.title){
+					return;
+				}
+				$scope.noteShadowCopy.$save().then(function (result) {
+					console.log(autoSave, result)
+					$rootScope.notes[result.id] = result;
+					if(autoSave){
+						$scope.autoSaved = true;
+						$timeout(function () {
+							$scope.autoSaved = false;
+						}, 2500);
+					}
+				})
+				// if(!$scope.noteShadowCopy.id) {
+				// 	NoteService.save($scope.noteShadowCopy);
+				// } else {
+				// 	NoteService.update({id: $scope.noteShadowCopy.id}, $scope.noteShadowCopy);
+				// }
+			};
+
+			var autoSaveTimer;
+			var initialSave = true;
+			$scope.$watch('[noteShadowCopy.title, noteShadowCopy.content]', function () {
+				if(autoSaveTimer){
+					$timeout.cancel(autoSaveTimer);
+				}
+				if($scope.noteShadowCopy.title && $scope.noteShadowCopy.title != "") {
+					if(initialSave){
+						initialSave = false;
+						return;
+					}
+					autoSaveTimer = $timeout(function () {
+						$scope.saveNote(true);
+					}, 1500);
+				}
+			});
 
 			$scope.cancelEdit = function () {
 				$location.path('/');
 			}
+
+
 
 		}]);
 }());

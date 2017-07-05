@@ -74,8 +74,12 @@ class Ownnotev2ApiController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function create($title, $group, $note) {
+		if($title == "" || !$title){
+			return new JSONResponse(['error' => 'title is missing']);
+		}
 		$note = [
 			'title' => $title,
+			'name' => $title,
 			'group' => $group,
 			'note' => $note
 		];
@@ -89,10 +93,14 @@ class Ownnotev2ApiController extends ApiController {
 	 * @NoCSRFRequired
 	 */
 	public function update($id, $title, $group, $content) {
+		if($title == "" || !$title){
+			return new JSONResponse(['error' => 'title is missing']);
+		}
 
 		$note = [
 			'id' => $id,
 			'title' => $title,
+			'name' => $title,
 			'group' => $group,
 			'note' => $content
 		];
@@ -117,7 +125,8 @@ class Ownnotev2ApiController extends ApiController {
 		}
 
 		$results = $this->noteService->delete($id);
-		return new JSONResponse($results);
+		$result = (object) ['success' => true];
+		return new JSONResponse($result);
 	}
 
 }

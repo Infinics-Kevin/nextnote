@@ -42,14 +42,19 @@ class OwnNoteMapper extends Mapper {
 	 * @param null $user_id
 	 * @return OwnNote if not found
 	 */
-	public function find($note_id, $user_id = null) {
+	public function find($note_id, $user_id = null, $deleted = 0) {
 		$params = [$note_id];
 		$uidSql = '';
 		if($user_id){
 			$params[] = $user_id;
 			$uidSql = 'and n.uid = ?';
 		}
-		$sql = "SELECT id, uid, name, grouping, shared, mtime, deleted, note FROM *PREFIX*ownnote n WHERE n.id= ? $uidSql and n.deleted = 0";
+
+		if(isset($deleted)){
+			$params[] = $deleted;
+			$deletedSql = 'and n.deleted = ?';
+		}
+		$sql = "SELECT id, uid, name, grouping, shared, mtime, deleted, note FROM *PREFIX*ownnote n WHERE n.id= ? $uidSql $deletedSql";
 		$results = [];
 		foreach($this->execute($sql, $params)->fetchAll() as $item){
 			/**
@@ -189,8 +194,8 @@ class OwnNoteMapper extends Mapper {
 	 * @return bool
 	 */
 	public function deleteNote(OwnNote $note) {
-		$this->deleteNoteParts($note);
-		$this->delete($note);
+		$note->setDeleted(1);
+		parent::update($note);
 		return true;
 	}
 

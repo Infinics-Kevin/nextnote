@@ -24,6 +24,7 @@
 namespace OCA\OwnNote\Controller;
 
 
+use OCP\IConfig;
 use \OCP\IRequest;
 use \OCP\AppFramework\Http\TemplateResponse;
 use \OCP\AppFramework\Controller;
@@ -33,10 +34,12 @@ use \OCP\Util;
 class PageController extends Controller {
 
     private $userId;
+	private $config;
 
-    public function __construct($appName, IRequest $request, $userId){
+	public function __construct($appName, IRequest $request, $userId, IConfig $config){
         parent::__construct($appName, $request);
         $this->userId = $userId;
+        $this->config = $config;
     }
 
 
@@ -51,8 +54,9 @@ class PageController extends Controller {
      * @NoCSRFRequired
      */
     public function index() {
-		$params = array('user' => $this->userId);
-		$response = new TemplateResponse('ownnote', 'list', $params);
+		$shareMode = $this->config->getAppValue('ownnote', 'sharemode', 'merge'); // merge or standalone
+		$params = array('user' => $this->userId, 'shareMode' => $shareMode);
+		$response = new TemplateResponse('ownnote', 'main', $params);
 		$ocVersion = \OCP\Util::getVersion();
 		if ($ocVersion[0] > 8 || ($ocVersion[0] == 8 && $ocVersion[1] >= 1)) {
 			$csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();

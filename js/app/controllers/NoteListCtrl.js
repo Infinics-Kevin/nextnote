@@ -31,7 +31,7 @@
 	 * List Controller
 	 */
 	angular.module('NextNotesApp')
-		.controller('NoteListCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
+		.controller('NoteListCtrl', ['$scope', '$rootScope', '$location', 'NoteService', function ($scope, $rootScope, $location, NoteService) {
 			$scope.editNote = function (note) {
 				$location.path('/note/edit/' + note.id)
 			};
@@ -39,6 +39,13 @@
 			$scope.newNote = function (note) {
 				$location.path('/note/new')
 			};
+
+			$scope.deleteNote = function (note) {
+				NoteService.getNoteById(note.id).then(function (note) {
+					note.$delete();
+					delete $rootScope.notes[note.id];
+				});
+			}
 		}]);
 
 }());

@@ -21,7 +21,7 @@
  */
 
 angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
-	return $resource(OC.generateUrl('apps/ownnote/api/v2.0/note') + '/:id', null,{
+	var notes = $resource(OC.generateUrl('apps/ownnote/api/v2.0/note') + '/:id', {id: '@id'},{
 		query:{
 			responseType: 'json',
 			transformResponse: function (result) {
@@ -35,6 +35,18 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
 				}
 				return notes
 			}
+		},
+		update:{
+			method: 'PUT'
 		}
-	}); // Note the full endpoint address
+	});
+
+	notes.prototype.$save = function() {
+		if (this.id) {
+			return this.$update();
+		} else {
+			return this.$create();
+		}
+	};
+	return notes;
 });
