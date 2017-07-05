@@ -72,6 +72,9 @@
 
 			$scope.autoSaved = false;
 			$scope.saveNote = function (autoSave) {
+				if(autoSaveTimer){
+					$timeout.cancel(autoSaveTimer);
+				}
 				$scope.noteShadowCopy.noteTitle = angular.copy($scope.noteShadowCopy.title)
 				if(!$scope.noteShadowCopy.title){
 					return;
@@ -108,7 +111,7 @@
 					}
 					autoSaveTimer = $timeout(function () {
 						$scope.saveNote(true);
-					}, 1500);
+					}, 15000);
 				}
 			});
 
