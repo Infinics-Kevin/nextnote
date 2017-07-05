@@ -84,6 +84,8 @@
 						$timeout(function () {
 							$scope.autoSaved = false;
 						}, 2500);
+					} else {
+						$location.path('/')
 					}
 				})
 				// if(!$scope.noteShadowCopy.id) {
