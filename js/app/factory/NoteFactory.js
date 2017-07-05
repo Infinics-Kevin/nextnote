@@ -29,7 +29,7 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
 				for(var k in result){
 					if(result.hasOwnProperty(k) && !isNaN(k)){
 						var note = result[k];
-						console.log(note)
+						note.mtime = note.mtime * 1000; //Covert the modified time to javascript timestamps
 						notes[note.id] = note;
 					}
 				}

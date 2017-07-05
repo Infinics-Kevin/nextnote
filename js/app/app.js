@@ -40,7 +40,8 @@
 			'ngSanitize',
 			'ngTouch',
 			'templates-main',
-			'ui.tinymce'
+			'ui.tinymce',
+			'yaru22.angular-timeago'
 		])
 		.config(['$httpProvider', function ($httpProvider) {
 		/** global: oc_requesttoken */
@@ -58,6 +59,11 @@
 				order: 'desc'
 			};
 			$rootScope.$broadcast('nextnotes_notes_loaded');
+			$rootScope.keys = Object.keys;
+
+			//Setup locale data
+			$rootScope.dateFormat = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y');
+			$rootScope.dateFormatLong = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y') + ' H:mm';
 		});
 	}]);
 }());

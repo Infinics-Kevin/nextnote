@@ -30,6 +30,8 @@ script('ownnote', 'vendor/angular-route/angular-route');
 script('ownnote', 'vendor/angular-sanitize/angular-sanitize');
 script('ownnote', 'vendor/angular-touch/angular-touch');
 script('ownnote', 'vendor/angular-tinymce/angular-tinymce');
+script('ownnote', 'vendor/angular-timeago/angular-timeago-core');
+script('ownnote', 'vendor/angular-timeago/angular-timeago');
 
 script('ownnote', 'app/app');
 script('ownnote', 'app/routes');
@@ -78,7 +80,7 @@ style('ownnote', 'app');
 				<span class="utils">
 					<a class="icon-rename action edit tooltipped rightwards" group="All" original-title=""></a>
 					<a class="icon-delete action delete tooltipped rightwards" group="All" original-title=""></a>
-					<span class="action numnotes">{{notes.length}}</span>
+					<span class="action numnotes">{{ keys(notes).length - 2 }}</span>
 				</span>
 			</li>
 		</ul>
