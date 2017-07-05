@@ -1,0 +1,52 @@
+
+<div id="ownnote">
+	<div id="controls">
+		<div id="new" class="button indent">New</div>
+		<div id="newfile" class="newfile indent">
+			<form id="createform" class="note-title-form">
+				<input type="text" class="newfileinput" id="newfilename" value="note title" style="color: rgb(160, 160, 160);">
+				<select id="groupname">
+					<option value="">Not grouped</option>
+					<option value="_new">New group</option>
+				</select>
+				<input type="text" class="newgroupinput" id="newgroupname" placeholder="group title">
+				<button id="create" class="button">Create</button>
+				<div id="cancel" class="button">Cancel</div>
+			</form>
+		</div>
+	</div>
+	<div class="listingBlank">
+
+	</div>
+	<table class="listingSort">
+		<thead>
+		<tr>
+			<th class="notename filesort notesort">
+				<div class="pointer sorttitle" id="sortname">Name</div>
+				<div class="sortarrow sortup">
+
+				</div>
+			</th>
+			<th class="actions"></th>
+			<th class="info modified notesort"> <span class="pointer" id="sortmod">Modified</span> </th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr class="listing" ng-repeat="note in notes">
+			<td title="{{ note.title }}" p="undefined" class="file pointer">{{ note.title }}</td>
+			<td class="actions">
+				<div id="note-{{ note.id }}-delete" class="buttons delete delete-note pointer" ng-click="deleteNote(note)"></div>
+				<div id="note-{{ note.id }}-edit" class="buttons edit edit-note pointer" ng-click="editNote(note)"></div>
+				<!--<div id="note-{{ note.id }}-share" class="share-note share pointer" ng-click="shareNote(note)">
+					<a class="share" data-item-type="ownnote" data-item="1" data-possible-permissions="31" data-path="1">
+						<div id="note-{{ note.id }}" class="buttons share share-note pointer"></div>
+					</a>
+				</div>-->
+			</td>
+			<td class="info">
+				<div class="modified">3 days ago</div>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

@@ -35,13 +35,11 @@ use \OCA\OwnNote\Lib\Backend;
 
 class Ownnotev2ApiController extends ApiController {
 
-	private $backend;
 	private $config;
 	private $noteService;
 
 	public function __construct($appName, IRequest $request, ILogger $logger, IConfig $config, OwnNoteService $noteService) {
 		parent::__construct($appName, $request);
-		$this->backend = new Backend($config);
 		$this->config = $config;
 		$this->noteService = $noteService;
 	}
