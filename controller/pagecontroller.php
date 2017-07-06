@@ -33,27 +33,27 @@ use \OCP\Util;
 
 class PageController extends Controller {
 
-    private $userId;
+	private $userId;
 	private $config;
 
-	public function __construct($appName, IRequest $request, $userId, IConfig $config){
-        parent::__construct($appName, $request);
-        $this->userId = $userId;
-        $this->config = $config;
-    }
+	public function __construct($appName, IRequest $request, $userId, IConfig $config) {
+		parent::__construct($appName, $request);
+		$this->userId = $userId;
+		$this->config = $config;
+	}
 
 
-    /**
-     * CAUTION: the @Stuff turn off security checks, for this page no admin is
-     *          required and no CSRF check. If you don't know what CSRF is, read
-     *          it up in the docs or you might create a security hole. This is
-     *          basically the only required method to add this exemption, don't
-     *          add it to any other method if you don't exactly know what it does
-     *
-     * @NoAdminRequired
-     * @NoCSRFRequired
-     */
-    public function index() {
+	/**
+	 * CAUTION: the @Stuff turn off security checks, for this page no admin is
+	 *          required and no CSRF check. If you don't know what CSRF is, read
+	 *          it up in the docs or you might create a security hole. This is
+	 *          basically the only required method to add this exemption, don't
+	 *          add it to any other method if you don't exactly know what it does
+	 *
+	 * @NoAdminRequired
+	 * @NoCSRFRequired
+	 */
+	public function index() {
 		$shareMode = $this->config->getAppValue('ownnote', 'sharemode', 'merge'); // merge or standalone
 		$params = array('user' => $this->userId, 'shareMode' => $shareMode);
 		$response = new TemplateResponse('ownnote', 'main', $params);
@@ -61,9 +61,19 @@ class PageController extends Controller {
 		if ($ocVersion[0] > 8 || ($ocVersion[0] == 8 && $ocVersion[1] >= 1)) {
 			$csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
 			$csp->addAllowedImageDomain('data:');
+			$csp->addAllowedImageDomain('blob:');
+			$csp->addAllowedFrameDomain('data:');
+
+			$allowedFrameDomains = array(
+				'https://www.youtube.com'
+			);
+			foreach ($allowedFrameDomains as $domain) {
+				$csp->addAllowedFrameDomain($domain);
+			}
+
 			$csp->addAllowedScriptDomain("'nonce-test'");
 			$response->setContentSecurityPolicy($csp);
 		}
 		return $response;
-    }
+	}
 }

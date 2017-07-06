@@ -42,12 +42,13 @@ class OwnNoteService {
 	 * Get vaults from a user.
 	 *
 	 * @param $userId
-	 * @param int $deleted
+	 * @param int|bool $deleted
+	 * @param string|bool $grouping
 	 * @return OwnNote[]
 	 */
-	public function findNotesFromUser($userId, $deleted = 0) {
+	public function findNotesFromUser($userId, $deleted = false, $grouping = false) {
 		// Get shares
-		return $this->noteMapper->findNotesFromUser($userId, $deleted);
+		return $this->noteMapper->findNotesFromUser($userId, $deleted, $grouping);
 	}
 
 	/**

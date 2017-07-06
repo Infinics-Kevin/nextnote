@@ -336,7 +336,11 @@
     height: 32px;
     line-height: 32px; }
 
-.mce-branding-powered-by {
+.mce-container .mce-window-head {
+  height: 20px !important; }
+  .mce-container .mce-window-head .mce-title img {
+    display: none; }
+.mce-container .mce-branding-powered-by {
   display: none; }
 
 .nav-trashbin {

@@ -69,12 +69,18 @@ class OwnNoteMapper extends Mapper {
 
 	/**
 	 * @param $userId
-	 * @param int $deleted
+	 * @param int|bool $deleted
+	 * @param string|bool $group
 	 * @return OwnNote[] if not found
 	 */
-	public function findNotesFromUser($userId, $deleted = 0) {
-		$params = [$userId, $deleted];
-		$sql = "SELECT id, uid, name, grouping, shared, mtime, deleted, note FROM *PREFIX*ownnote n WHERE `uid` = ? and n.deleted = ?";
+	public function findNotesFromUser($userId, $deleted = 0, $group = false) {
+		$params = [$userId, (int) $deleted];
+		$groupSql = '';
+		if($group){
+			$groupSql = 'and n.grouping = ?';
+			$params[] = $group;
+		}
+		$sql = "SELECT id, uid, name, grouping, shared, mtime, deleted, note FROM *PREFIX*ownnote n WHERE `uid` = ? and n.deleted = ? $groupSql";
 		$results = [];
 		foreach($this->execute($sql, $params)->fetchAll() as $item){
 			/**

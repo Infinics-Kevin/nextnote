@@ -48,10 +48,13 @@ class Ownnotev2ApiController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 * @TODO Add etag / lastmodified
+	 * @param int|bool $deleted
+	 * @param string|bool $group
+	 * @return JSONResponse
 	 */
-	public function index() {
+	public function index($deleted = false, $group = false) {
 		$uid = \OC::$server->getUserSession()->getUser()->getUID();
-		$results = $this->noteService->findNotesFromUser($uid, false);
+		$results = $this->noteService->findNotesFromUser($uid, $deleted, $group);
 		return new JSONResponse($results);
 	}
 
