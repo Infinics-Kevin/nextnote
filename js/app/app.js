@@ -41,21 +41,26 @@
 			'ngTouch',
 			'templates-main',
 			'ui.tinymce',
-			'yaru22.angular-timeago'
+			'yaru22.angular-timeago',
+			'xeditable'
 		])
 		.config(['$httpProvider', function ($httpProvider) {
 		/** global: oc_requesttoken */
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
 	}]).config(['$qProvider', function ($qProvider) {
 		$qProvider.errorOnUnhandledRejections(false);
-	}]).run(['$rootScope', 'NoteFactory', function ($rootScope, NoteFactory) {
+	}]).run(['$rootScope', 'NoteFactory', 'editableOptions', function ($rootScope, NoteFactory, editableOptions) {
+		editableOptions.theme = 'bs2';
 		console.log('App loaded');
 		$rootScope.list_sorting = {
 			what: 'mtime',
 			reverse: true
 		};
-		$rootScope.list_filter = {
+		$rootScope.noteGroupFilter = {
 			grouping: 'all'
+		};
+		$rootScope.list_filter = {
+			deleted: 0
 		};
 
 		NoteFactory.query(function (notes) {

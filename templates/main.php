@@ -32,6 +32,7 @@ script('ownnote', 'vendor/angular-touch/angular-touch');
 script('ownnote', 'vendor/angular-tinymce/angular-tinymce');
 script('ownnote', 'vendor/angular-timeago/angular-timeago-core');
 script('ownnote', 'vendor/angular-timeago/angular-timeago');
+script('ownnote', 'vendor/angular-xeditable/xeditable');
 
 script('ownnote', 'app/app');
 script('ownnote', 'app/routes');
@@ -63,20 +64,7 @@ echo '<script nonce="test"> var shareMode = "'. $sharemode .'"</script>';
 <div id="app" ng-app="NextNotesApp" ng-controller="MainCtrl">
 	<div id="app-navigation">
 		<ul id="grouplist">
-			<!--<li class="group" data-type="all">
-				<a class="name"	 title="Shared with you">Shared	with you</a>
-				<span class="utils">
-					<span  class="action numnotes">0</span>
-				</span>
-			</li>
-			<li class="group" data-type="all">
-				<a class="name"	 title="Shared with others">Shared with others</a>
-				<span class="utils">
-					<span  class="action numnotes">0</span>
-				</span>
-			</li> -->
-
-			<li class="group"  ng-click="list_filter.grouping = 'all'; " ng-class="{'active': list_filter.grouping === 'all' }">
+			<li class="group"  ng-click="noteGroupFilter.grouping = 'all'; " ng-class="{'active': noteGroupFilter.grouping === 'all' }">
 				<a class="name" role="button" title="All">All</a>
 				<span class="utils">
 					<a class="icon-rename action edit tooltipped rightwards" group="All" original-title=""></a>
@@ -84,7 +72,7 @@ echo '<script nonce="test"> var shareMode = "'. $sharemode .'"</script>';
 					<span class="action numnotes" ng-show="keys(notes).length - 2 > 0">{{ keys(notes).length - 2 }}</span>
 				</span>
 			</li>
-			<li class="group"  ng-click="list_filter.grouping = ''; " ng-class="{'active': list_filter.grouping === '' }">
+			<li class="group"  ng-click="noteGroupFilter.grouping = ''; " ng-class="{'active': noteGroupFilter.grouping === '' }">
 				<a class="name" title="Not grouped">Not grouped</a>
 				<span class="utils">
 					<a class="icon-rename action edit tooltipped rightwards" group="All" original-title=""></a>
@@ -92,15 +80,17 @@ echo '<script nonce="test"> var shareMode = "'. $sharemode .'"</script>';
 					<!-- <span class="action numnotes" ng-show="keys(notes).length - 2 > 0">{{ keys(notes).length - 2 }}</span> -->
 				</span>
 			</li>
-			<li id="group-{{group}}" ng-if="group !== ''" class="group" ng-click="list_filter.grouping = group; " ng-class="{'active': list_filter.grouping === group }" data-type="category" ng-repeat="group in note_groups">
-				<a class="name" id="link-webstore" role="button" title="webstore">{{ group }}</a>
-				<span class="utils"><a class="icon-rename action edit rightwards"></a>
-					<a class="icon-delete action delete rightwards"></a>
+			<li id="group-{{group}}" ng-if="group !== ''" class="group" ng-click="noteGroupFilter.grouping = group; " ng-class="{'active': noteGroupFilter.grouping === group }" data-type="category" ng-repeat="group in note_groups">
+				<a editable-text="group" e-form="textBtnForm" onbeforesave="renameGroup(group, $data)" class="name" id="link-webstore" role="button" title="webstore">{{ group }}</a>
+
+				<span class="utils">
+					<a ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible" class="icon-rename action edit rightwards"></a>
+					<a class="icon-delete action delete rightwards" ng-hide="textBtnForm.$visible"></a>
 					<!-- <span class="action numnotes">1</span> -->
 				</span>
 			</li>
-			<li data-id="trashbin" class="nav-trashbin">
-				<a href="#" class="nav-icon-trashbin svg">
+			<li data-id="trashbin" class="nav-trashbin" ng-class="{'active': list_filter.deleted === 1}" ng-click="list_filter.deleted = (list_filter.deleted === 0 ) ? 1 : 0">
+				<a class="nav-icon-trashbin svg">
 					Deleted notes
 				</a>
 			</li>

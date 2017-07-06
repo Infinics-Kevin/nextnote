@@ -33,6 +33,9 @@
 	angular.module('NextNotesApp')
 		.controller('MainCtrl', ['$scope', '$rootScope', '$location', function ($scope, $rootScope, $location) {
 
+			$scope.renameGroup = function (oldName, newName) {
+				console.log('Rename', oldName, 'to ', newName);
+			}
 		}]);
 
 }());

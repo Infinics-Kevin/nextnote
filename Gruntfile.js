@@ -81,7 +81,7 @@ module.exports = function (grunt) {
 				files: ['Gruntfile.js', 'templates/views/{,*/}{,*/}{,*/}*.html', 'templates/views/*.html', 'sass/*', 'sass/partials/*'],
 				tasks: ['html2js', 'sass'],
 				options: {
-					spawn: false,
+					spawn: true,
 					interrupt: true,
 					reload: true
 				}

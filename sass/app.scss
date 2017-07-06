@@ -1,3 +1,4 @@
+@import "vendor/xeditable/_xeditable.scss";
 #app-content.content-with-sidebar {
   width: 60%;
 }
@@ -445,11 +446,41 @@
   .nav-icon-trashbin {
 
     background-image: url(../../../apps/files/css/../img/delete.svg?v=1);
-    padding-left: 44px;
+    padding-left: 44px !important;
     background-size: 16px 16px;
     background-position: 14px center;
     background-repeat: no-repeat;
   }
 }
-
+.editable-text {
+  padding-left: 9px;
+  width: 100%;
+  padding-right: 9px;
+  input[type="text"]{
+    width: 130px !important;
+  }
+}
+.btn{
+  &:hover{
+    background-color: #e6e6e6;
+    border-color: #adadad;
+  }
+  background-color: #fff;
+  border-color: #ccc;
+}
+.btn-primary{
+  &:hover{
+    background-color: #286090;
+    border-color: #204d74;
+  }
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+.icon-ok{
+  background-image:url('../../../core/css/../img/actions/checkmark-white.svg?v=2');
+}
+.icon-remove{
+  background-image:url('../../../core/css/../img/actions/close.svg?v=2');
+}
 /*# sourceMappingURL=style.css.map */
