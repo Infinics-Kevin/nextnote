@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('NextNotesApp')
-		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', '$timeout', function ($scope, $rootScope, NoteService, $routeParams, $location, $timeout) {
+		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', '$timeout', 'NoteFactory', function ($scope, $rootScope, NoteService, $routeParams, $location, $timeout, NoteFactory) {
 			$scope.noteShadowCopy = {
 				title: '',
 				content: ''
@@ -47,7 +47,7 @@
 				});
 			} else {
 				$scope.note = NoteService.newNote();
-				$scope.noteShadowCopy = angular.copy($scope.note);
+				$scope.noteShadowCopy = new NoteFactory(angular.copy($scope.note));
 			}
 
 			var o = $('#ownnote').offset();

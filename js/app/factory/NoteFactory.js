@@ -36,9 +36,12 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
 				return notes
 			}
 		},
-		update:{
+		update: {
 			method: 'PUT'
-		}
+		},
+                create: {
+ 			method: 'POST'
+                }
 	});
 
 	notes.prototype.$save = function() {
