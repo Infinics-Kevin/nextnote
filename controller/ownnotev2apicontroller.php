@@ -124,7 +124,7 @@ class Ownnotev2ApiController extends ApiController {
 			return new NotFoundJSONResponse();
 		}
 
-		$results = $this->noteService->delete($id);
+		$this->noteService->delete($id);
 		$result = (object) ['success' => true];
 		return new JSONResponse($result);
 	}

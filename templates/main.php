@@ -49,6 +49,7 @@ script('ownnote', 'app/factory/NoteFactory');
  */
 //Core
 \OCP\Util::addStyle('core', 'icons');
+\OCP\Util::addStyle('files_trashbin', 'trash');
 
 
 /*build-css-start*/
@@ -83,6 +84,10 @@ style('ownnote', 'app');
 					<a class="icon-delete action delete tooltipped rightwards" group="All" original-title=""></a>
 					<span class="action numnotes" ng-show="keys(notes).length - 2 > 0">{{ keys(notes).length - 2 }}</span>
 				</span>
+			</li>
+			<li data-id="trashbin" class="nav-trashbin">
+				<a href="#" class="nav-icon-trashbin svg">
+					Deleted notes			</a>
 			</li>
 		</ul>
 	</div>

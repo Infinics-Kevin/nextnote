@@ -104,7 +104,7 @@
 				if(autoSaveTimer){
 					$timeout.cancel(autoSaveTimer);
 				}
-				if($scope.noteShadowCopy.title && $scope.noteShadowCopy.title != "") {
+				if($scope.noteShadowCopy.title && $scope.noteShadowCopy.title !== "") {
 					if(initialSave){
 						initialSave = false;
 						return;

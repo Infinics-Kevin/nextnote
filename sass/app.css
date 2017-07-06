@@ -339,6 +339,15 @@
 .mce-branding-powered-by {
   display: none; }
 
+.nav-trashbin {
+  bottom: 0; }
+  .nav-trashbin .nav-icon-trashbin {
+    background-image: url(../../../apps/files/css/../img/delete.svg?v=1);
+    padding-left: 44px;
+    background-size: 16px 16px;
+    background-position: 14px center;
+    background-repeat: no-repeat; }
+
 /*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=app.css.map */
