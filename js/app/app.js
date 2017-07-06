@@ -54,11 +54,13 @@
 			what: 'mtime',
 			reverse: true
 		};
+		$rootScope.list_filter = {
+			grouping: 'all'
+		};
+
 		NoteFactory.query(function (notes) {
 			console.log('Notes received', notes);
 			$rootScope.notes = notes;
-
-
 			$rootScope.$broadcast('nextnotes_notes_loaded');
 			$rootScope.keys = Object.keys;
 
@@ -73,5 +75,25 @@
 			$rootScope.dateFormat = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y');
 			$rootScope.dateFormatLong = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y') + ' H:mm';
 		});
+
+
+		// Setup a watcher on the notes so groups are always correct
+		// @TODO Implement multi level support
+		$rootScope.note_groups = [];
+		$rootScope.$watch('notes', function (n) {
+			if(!n){
+				return;
+			}
+
+			var notes = $rootScope.notes;
+			angular.forEach(notes, function (note) {
+				if(note.hasOwnProperty('id')){
+					var idx = $rootScope.note_groups.indexOf(note.grouping);
+					if(shareMode === 'merge' && idx === -1){
+						$rootScope.note_groups.push(note.grouping);
+					}
+				}
+			});
+		} , true);
 	}]);
 }());

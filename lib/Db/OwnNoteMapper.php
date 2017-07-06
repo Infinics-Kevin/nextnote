@@ -123,7 +123,7 @@ class OwnNoteMapper extends Mapper {
 	public function create($note) {
 		$parts = $this->utils->splitContent($note->getNote());
 		$note->setNote('');
-                $note->setShared(false);
+		$note->setShared(false);
 		/**
 		 * @var $note OwnNote
 		 */

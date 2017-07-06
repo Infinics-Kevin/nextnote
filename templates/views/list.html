@@ -33,7 +33,7 @@
 		</tr>
 		</thead>
 		<tbody>
-		<tr class="listing" ng-repeat="note in localNoteList | orderBy:list_sorting.what:list_sorting.reverse">
+		<tr class="listing" ng-repeat="note in localNoteList | noteGroupFilter:list_filter | orderBy:list_sorting.what:list_sorting.reverse">
 			<td title="{{ note.title }}" p="undefined" class="file pointer"  ng-click="editNote(note)">{{ note.title }}</td>
 			<td class="actions">
 				<div id="note-{{ note.id }}-delete" class="buttons delete delete-note pointer" ng-click="deleteNote(note)"></div>

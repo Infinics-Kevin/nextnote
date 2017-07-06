@@ -41,6 +41,7 @@ script('ownnote', 'app/controllers/NoteListCtrl');
 script('ownnote', 'app/controllers/NoteEditCtrl');
 script('ownnote', 'app/services/NoteService');
 script('ownnote', 'app/factory/NoteFactory');
+script('ownnote', 'app/filters/noteFilter');
 /*build-js-end*/
 
 
@@ -55,8 +56,8 @@ script('ownnote', 'app/factory/NoteFactory');
 /*build-css-start*/
 style('ownnote', 'app');
 /*build-css-end*/
-//$sharemode = \OCP\Config::getAppValue('ownnote', 'sharemode', 'merge');
-//echo '<script nonce="2726c7f26c"> var shareMode = "'. $shareMode .'"</script>';
+$sharemode = \OCP\Config::getAppValue('ownnote', 'sharemode', 'merge');
+echo '<script nonce="test"> var shareMode = "'. $sharemode .'"</script>';
 ?>
 <input type="hidden" name="nextNonce" id="nextNonce" value="<?php p(\OC::$server->getContentSecurityPolicyNonceManager()->getNonce()) ?>" />
 <div id="app" ng-app="NextNotesApp" ng-controller="MainCtrl">
@@ -75,19 +76,33 @@ style('ownnote', 'app');
 				</span>
 			</li> -->
 
-			<li class="group active" data-type="all"><a class="name"
-														id="link-All"
-														role="button"
-														title="All">All</a>
+			<li class="group"  ng-click="list_filter.grouping = 'all'; " ng-class="{'active': list_filter.grouping === 'all' }">
+				<a class="name" role="button" title="All">All</a>
 				<span class="utils">
 					<a class="icon-rename action edit tooltipped rightwards" group="All" original-title=""></a>
 					<a class="icon-delete action delete tooltipped rightwards" group="All" original-title=""></a>
 					<span class="action numnotes" ng-show="keys(notes).length - 2 > 0">{{ keys(notes).length - 2 }}</span>
 				</span>
 			</li>
+			<li class="group"  ng-click="list_filter.grouping = ''; " ng-class="{'active': list_filter.grouping === '' }">
+				<a class="name" title="Not grouped">Not grouped</a>
+				<span class="utils">
+					<a class="icon-rename action edit tooltipped rightwards" group="All" original-title=""></a>
+					<a class="icon-delete action delete tooltipped rightwards" group="All" original-title=""></a>
+					<!-- <span class="action numnotes" ng-show="keys(notes).length - 2 > 0">{{ keys(notes).length - 2 }}</span> -->
+				</span>
+			</li>
+			<li id="group-{{group}}" ng-if="group !== ''" class="group" ng-click="list_filter.grouping = group; " ng-class="{'active': list_filter.grouping === group }" data-type="category" ng-repeat="group in note_groups">
+				<a class="name" id="link-webstore" role="button" title="webstore">{{ group }}</a>
+				<span class="utils"><a class="icon-rename action edit rightwards"></a>
+					<a class="icon-delete action delete rightwards"></a>
+					<!-- <span class="action numnotes">1</span> -->
+				</span>
+			</li>
 			<li data-id="trashbin" class="nav-trashbin">
 				<a href="#" class="nav-icon-trashbin svg">
-					Deleted notes			</a>
+					Deleted notes
+				</a>
 			</li>
 		</ul>
 	</div>

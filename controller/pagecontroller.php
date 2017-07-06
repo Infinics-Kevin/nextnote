@@ -61,6 +61,7 @@ class PageController extends Controller {
 		if ($ocVersion[0] > 8 || ($ocVersion[0] == 8 && $ocVersion[1] >= 1)) {
 			$csp = new \OCP\AppFramework\Http\ContentSecurityPolicy();
 			$csp->addAllowedImageDomain('data:');
+			$csp->addAllowedScriptDomain("'nonce-test'");
 			$response->setContentSecurityPolicy($csp);
 		}
 		return $response;
