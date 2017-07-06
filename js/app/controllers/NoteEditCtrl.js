@@ -59,10 +59,10 @@
 					'advlist autolink lists link image charmap print preview hr anchor pagebreak',
 					'searchreplace wordcount visualblocks visualchars code fullscreen',
 					'insertdatetime media nonbreaking save table contextmenu directionality',
-					'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help'
+					'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help bdesk_photo'
 				],
 				extended_valid_elements: "form[name|id|action|method|enctype|accept-charset|onsubmit|onreset|target],input[id|name|type|value|size|maxlength|checked|accept|src|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],textarea[id|name|rows|cols|maxlength|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],option[name|id|value|selected|style],select[id|name|type|value|size|maxlength|checked|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|multiple|style]",
-				toolbar1: 'print | undo redo | styleselect | bold italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media | codesample help',
+				toolbar1: 'print | undo redo | styleselect | bold italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media bdesk_photo | codesample help | code ',
 				image_advtab: true,
 				allow_html_data_urls: true,
 				allow_script_urls: true,
@@ -70,7 +70,20 @@
 				width: '100%',
 				height: h - 140,
 				autoresize_min_height: h - 140,
-				autoresize_max_height: h - 140
+				autoresize_max_height: h - 140,
+				textpattern_patterns: [
+					{start: '*', end: '*', format: 'italic'},
+					{start: '**', end: '**', format: 'bold'},
+					{start: '#', format: 'h1'},
+					{start: '##', format: 'h2'},
+					{start: '###', format: 'h3'},
+					{start: '####', format: 'h4'},
+					{start: '#####', format: 'h5'},
+					{start: '######', format: 'h6'},
+					{start: '1. ', cmd: 'InsertOrderedList'},
+					{start: '* ', cmd: 'InsertUnorderedList'},
+					{start: '- ', cmd: 'InsertUnorderedList'}
+				]
 			};
 
 			$scope.autoSaved = false;
