@@ -75,12 +75,11 @@
 				if(autoSaveTimer){
 					$timeout.cancel(autoSaveTimer);
 				}
-				$scope.noteShadowCopy.noteTitle = angular.copy($scope.noteShadowCopy.title)
 				if(!$scope.noteShadowCopy.title){
 					return;
 				}
 				$scope.noteShadowCopy.$save().then(function (result) {
-					console.log(autoSave, result)
+					result.mtime = result.mtime * 1000;
 					$rootScope.notes[result.id] = result;
 					if(autoSave){
 						$scope.autoSaved = true;
@@ -91,11 +90,6 @@
 						$location.path('/')
 					}
 				})
-				// if(!$scope.noteShadowCopy.id) {
-				// 	NoteService.save($scope.noteShadowCopy);
-				// } else {
-				// 	NoteService.update({id: $scope.noteShadowCopy.id}, $scope.noteShadowCopy);
-				// }
 			};
 
 			var autoSaveTimer;
@@ -118,8 +112,5 @@
 			$scope.cancelEdit = function () {
 				$location.path('/');
 			}
-
-
-
 		}]);
 }());

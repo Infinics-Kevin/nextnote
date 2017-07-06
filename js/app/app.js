@@ -50,14 +50,15 @@
 		$qProvider.errorOnUnhandledRejections(false);
 	}]).run(['$rootScope', 'NoteFactory', function ($rootScope, NoteFactory) {
 		console.log('App loaded');
+		$rootScope.list_sorting = {
+			what: 'mtime',
+			reverse: true
+		};
 		NoteFactory.query(function (notes) {
 			console.log('Notes received', notes);
 			$rootScope.notes = notes;
 
-			$rootScope.list_sorting = {
-				what: 'title',
-				order: 'desc'
-			};
+
 			$rootScope.$broadcast('nextnotes_notes_loaded');
 			$rootScope.keys = Object.keys;
 

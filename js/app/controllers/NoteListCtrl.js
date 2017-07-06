@@ -45,7 +45,30 @@
 					note.$delete();
 					delete $rootScope.notes[note.id];
 				});
+			};
+
+			var init = function () {
+				var locaList = $.map(angular.copy($rootScope.notes), function (value, index) {
+					if (typeof value === 'object' && value.hasOwnProperty('id')) {
+						return [value];
+					}
+				});
+				$scope.localNoteList = locaList;
+			};
+			if ($rootScope.notes) {
+				init();
 			}
+
+			$rootScope.$on('nextnotes_notes_loaded', function () {
+				init();
+			});
+
+			$scope.changeOrder = function () {
+				console.log('change order');
+				vm.orderReverse = !vm.orderReverse;
+				vm.items = $filter('orderBy')(vm.items, 'name', vm.orderReverse);
+			};
+
 		}]);
 
 }());
