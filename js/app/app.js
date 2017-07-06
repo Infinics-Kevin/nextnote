@@ -89,7 +89,7 @@
 			angular.forEach(notes, function (note) {
 				if(note.hasOwnProperty('id')){
 					var idx = $rootScope.note_groups.indexOf(note.grouping);
-					if(shareMode === 'merge' && idx === -1){
+					if(shareMode === 'merge' && idx === -1 && note.grouping !== "_new" && note.grouping !== ""){
 						$rootScope.note_groups.push(note.grouping);
 					}
 				}

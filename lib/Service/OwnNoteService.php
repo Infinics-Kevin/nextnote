@@ -77,7 +77,7 @@ class OwnNoteService {
 			$entity = new OwnNote();
 			$entity->setName($note['title']);
 			$entity->setUid($userId);
-			$entity->setGrouping($note['group']);
+			$entity->setGrouping($note['grouping']);
 			$entity->setNote($note['note'] ? $note['note'] : '');
 			$entity->setMtime(time());
 			$note = $entity;
@@ -102,7 +102,7 @@ class OwnNoteService {
 		if (is_array($note)) {
 			$entity = $this->find($note['id']);
 			$entity->setName($note['title']);
-			$entity->setGrouping($note['group']);
+			$entity->setGrouping($note['grouping']);
 			$entity->setNote($note['note']);
 			$entity->setMtime(time());
 			$note = $entity;

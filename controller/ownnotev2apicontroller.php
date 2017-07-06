@@ -83,7 +83,7 @@ class Ownnotev2ApiController extends ApiController {
 		$note = [
 			'title' => $title,
 			'name' => $title,
-			'group' => $group,
+			'grouping' => $group,
 			'note' => $note
 		];
 		$uid = \OC::$server->getUserSession()->getUser()->getUID();
@@ -95,7 +95,7 @@ class Ownnotev2ApiController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function update($id, $title, $group, $content) {
+	public function update($id, $title, $grouping, $content) {
 		if($title == "" || !$title){
 			return new JSONResponse(['error' => 'title is missing']);
 		}
@@ -104,7 +104,7 @@ class Ownnotev2ApiController extends ApiController {
 			'id' => $id,
 			'title' => $title,
 			'name' => $title,
-			'group' => $group,
+			'grouping' => $grouping,
 			'note' => $content
 		];
 

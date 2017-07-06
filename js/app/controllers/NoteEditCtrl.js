@@ -36,7 +36,7 @@
 				title: '',
 				content: ''
 			};
-
+			$scope.new_group = '';
 
 
 			var noteId = ($routeParams.noteId) ? $routeParams.noteId : null;
@@ -81,6 +81,11 @@
 				if(!$scope.noteShadowCopy.title){
 					return;
 				}
+
+				if($scope.noteShadowCopy.grouping === '_new' && $scope.new_group !== ''){
+					$scope.noteShadowCopy.grouping = angular.copy($scope.new_group);
+				}
+
 				$scope.noteShadowCopy.$save().then(function (result) {
 					result.mtime = result.mtime * 1000;
 					$rootScope.notes[result.id] = result;
@@ -90,7 +95,7 @@
 							$scope.autoSaved = false;
 						}, 2500);
 					} else {
-						$location.path('/')
+						$location.path('/');
 					}
 				})
 			};
