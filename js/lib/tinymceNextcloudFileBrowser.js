@@ -5,7 +5,7 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
             console.log('Dir index of' + dir +' ', dirIndex);
         });
     }
-
+    // Bestand tonen: remote.php/webdav/ $path
     var browser = $('<div id="mceNextcloudFileBrowser" />');
     browser.css('zIndex', 99999);
 
