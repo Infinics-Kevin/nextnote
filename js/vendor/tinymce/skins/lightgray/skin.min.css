@@ -1132,26 +1132,31 @@ body .mce-abs-layout-item, .mce-abs-end {
 }
 
 .mce-btn button {
-    padding: 4px 8px;
-    font-size: 14px;
-    line-height: 20px;
-    *line-height: 16px;
-    cursor: pointer;
-    color: #333;
-    text-align: center;
-    overflow: visible;
-    -webkit-appearance: none
+    padding: 4px 8px !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    *line-height: 16px !important;
+    cursor: pointer !important;
+    color: #333 !important;
+    text-align: center !important;
+    overflow: visible !important;
+    -webkit-appearance: none !important;
+    min-height: auto !important;
 }
 
 .mce-btn button::-moz-focus-inner {
-    border: 0;
-    padding: 0
+    border: 0 !important;
+    padding: 0 !important;
 }
 
 .mce-btn i {
     text-shadow: 1px 1px none
 }
+#image_embed{
+    margin: 15px !important;
+    padding: 0 !important;
 
+}
 .mce-primary.mce-btn-has-text {
     min-width: 50px
 }
@@ -2297,13 +2302,14 @@ i.mce-i-resize {
     display: inline-block !important;;
     -webkit-transition: border linear .2s, box-shadow linear .2s !important;;
     transition: border linear .2s, box-shadow linear .2s !important;;
-    height: 28px !important;;
+    height: 28px;
     resize: none !important;;
     padding: 0 4px 0 4px !important;;
     white-space: pre-wrap !important;;
     *white-space: pre !important;;
     color: #333 !important;
     min-height: auto !important;
+    margin: 0 !important;
 }
 
 .mce-textbox:focus, .mce-textbox.mce-focus {
