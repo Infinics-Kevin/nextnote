@@ -67,7 +67,7 @@
       width: 30%;
     }
     &.info {
-      width: 15%;
+      width: 25%;
     }
   }
 }
@@ -121,7 +121,7 @@
 .modified {
   color: #A0A0A0;
   display: inline-block;
-  width: 35%;
+  width: 100%;
 }
 
 .buttons {
@@ -175,6 +175,9 @@
 }
 
 .notesort {
+  > span{
+    float: left;
+  }
   font-weight: normal;
   color: #A0A0A0;
 }

@@ -230,7 +230,7 @@ a.editable-empty:focus {
     .listingSort tr > td.actions {
       width: 30%; }
     .listingSort tr > td.info {
-      width: 15%; }
+      width: 25%; }
 
 .listingBlank {
   height: 40pt;
@@ -273,7 +273,7 @@ a.editable-empty:focus {
 .modified {
   color: #A0A0A0;
   display: inline-block;
-  width: 35%; }
+  width: 100%; }
 
 .buttons {
   background-repeat: no-repeat;
@@ -315,6 +315,8 @@ a.editable-empty:focus {
 .notesort {
   font-weight: normal;
   color: #A0A0A0; }
+  .notesort > span {
+    float: left; }
 
 .sortarrow {
   background-repeat: no-repeat;
