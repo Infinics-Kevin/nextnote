@@ -11,7 +11,7 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 			return;
 		}
 
-		if (file.type === 'file' && file.mimetype.indexOf('image') === 0) {
+		if (file.type === 'file') {
 			var filePath = currentPath + file.name;
 			var remotePath = OC.linkToRemote('webdav') + filePath;
 			win.document.getElementById(field_name).value = remotePath;
@@ -65,6 +65,9 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 		title: 'Select a file from your Nextcloud',
 		create: function () {
 			$(browser).css("maxHeight", 500);
+		},
+		close: function () {
+			$('#mceNextcloudFileBrowser').dialog('destroy');
 		}
 	});
 	listDir('/')
