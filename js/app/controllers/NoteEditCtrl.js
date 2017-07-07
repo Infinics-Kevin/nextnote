@@ -71,6 +71,8 @@
 				height: h - 140,
 				autoresize_min_height: h - 140,
 				autoresize_max_height: h - 140,
+                file_picker_types: 'file image media',
+                file_browser_callback: NextCloudFileBrowserDialogue,
 				textpattern_patterns: [
 					{start: '*', end: '*', format: 'italic'},
 					{start: '**', end: '**', format: 'bold'},

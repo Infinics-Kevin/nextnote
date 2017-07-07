@@ -561,6 +561,9 @@ a.editable-empty:focus {
 .icon-remove {
   background-image: url("../../../core/css/../img/actions/close.svg?v=2"); }
 
+.ui-dialog.ui-widget[aria-describedby="mceNextcloudFileBrowser"] {
+  z-index: 99999; }
+
 /*# sourceMappingURL=style.css.map */
 
 /*# sourceMappingURL=app.css.map */

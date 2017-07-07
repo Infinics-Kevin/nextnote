@@ -65,6 +65,7 @@ class Ownnotev2ApiController extends ApiController {
 	 */
 	public function get($id) {
 		$results = $this->noteService->find($id);
+		//@TODO for sharing add access check
 		if (!$results) {
 			return new NotFoundJSONResponse();
 		}
@@ -108,7 +109,7 @@ class Ownnotev2ApiController extends ApiController {
 			'note' => $content,
             'deleted' => $deleted
 		];
-
+        //@TODO for sharing add access check
 		$entity = $this->noteService->find($id);
 		if (!$entity) {
 			return new NotFoundJSONResponse();
@@ -127,7 +128,7 @@ class Ownnotev2ApiController extends ApiController {
 		if (!$entity) {
 			return new NotFoundJSONResponse();
 		}
-
+        //@TODO for sharing add access check
 		$this->noteService->delete($id);
 		$result = (object) ['success' => true];
 		return new JSONResponse($result);

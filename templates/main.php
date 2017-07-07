@@ -22,6 +22,7 @@
  */
 /*build-js-start*/
 script('ownnote', 'vendor/tinymce/tinymce.min');
+script('ownnote', 'lib/tinymceNextcloudFileBrowser');
 script('ownnote', 'vendor/angular/angular.min');
 script('ownnote', 'vendor/angular-animate/angular-animate');
 script('ownnote', 'vendor/angular-cookies/angular-cookies');
