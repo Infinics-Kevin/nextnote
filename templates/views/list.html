@@ -35,7 +35,7 @@
 		<tbody>
 		<tr class="listing" ng-repeat="note in localNoteList | noteGroupFilter:noteGroupFilter | filter:list_filter | orderBy:list_sorting.what:list_sorting.reverse">
 			<td title="{{ note.title }}" p="undefined" class="file pointer"  ng-click="editNote(note)">{{ note.title }}</td>
-			<td class="actions">
+			<td class="actions" ng-if="list_filter.deleted === 0">
 				<div id="note-{{ note.id }}-delete" class="buttons delete delete-note pointer" ng-click="deleteNote(note)"></div>
 				<div id="note-{{ note.id }}-edit" class="buttons edit edit-note pointer" ng-click="editNote(note)"></div>
 				<!--<div id="note-{{ note.id }}-share" class="share-note share pointer" ng-click="shareNote(note)">
@@ -43,6 +43,9 @@
 						<div id="note-{{ note.id }}" class="buttons share share-note pointer"></div>
 					</a>
 				</div>-->
+			</td>
+			<td class="actions" ng-if="list_filter.deleted === 1">
+				<div id="note-{{ note.id }}-restore"  class="buttons pointer restore-note" ng-click="resotoreNote(note)"></div>
 			</td>
 			<td class="info">
 				<div class="modified" title="{{ note.mtime | date:dateFormatLong}}">{{ note.mtime  | timeAgo}}</div>

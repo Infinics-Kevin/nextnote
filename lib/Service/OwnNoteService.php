@@ -51,16 +51,17 @@ class OwnNoteService {
 		return $this->noteMapper->findNotesFromUser($userId, $deleted, $grouping);
 	}
 
-	/**
-	 * Get a single vault
-	 *
-	 * @param $note_id
-	 * @param $user_id
-	 * @return OwnNote
-	 * @internal param $vault_id
-	 */
-	public function find($note_id, $user_id = null) {
-		$note = $this->noteMapper->find($note_id, $user_id);
+    /**
+     * Get a single vault
+     *
+     * @param $note_id
+     * @param $user_id
+     * @param bool|int $deleted
+     * @return OwnNote
+     * @internal param $vault_id
+     */
+	public function find($note_id, $user_id = null, $deleted = false) {
+		$note = $this->noteMapper->find($note_id, $user_id, $deleted);
 		return $note;
 	}
 
@@ -104,6 +105,7 @@ class OwnNoteService {
 			$entity->setName($note['title']);
 			$entity->setGrouping($note['grouping']);
 			$entity->setNote($note['note']);
+			$entity->setDeleted($note['deleted']);
 			$entity->setMtime(time());
 			$note = $entity;
 		}

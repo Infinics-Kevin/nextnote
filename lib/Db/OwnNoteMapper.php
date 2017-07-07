@@ -38,12 +38,13 @@ class OwnNoteMapper extends Mapper {
 	}
 
 
-	/**
-	 * @param $note_id
-	 * @param null $user_id
-	 * @return OwnNote if not found
-	 */
-	public function find($note_id, $user_id = null, $deleted = 0) {
+    /**
+     * @param $note_id
+     * @param null $user_id
+     * @param int|bool $deleted
+     * @return OwnNote if not found
+     */
+	public function find($note_id, $user_id = null, $deleted = false) {
 		$params = [$note_id];
 		$uidSql = '';
 		if ($user_id) {
@@ -51,7 +52,7 @@ class OwnNoteMapper extends Mapper {
 			$uidSql = 'and n.uid = ?';
 		}
 
-		if (isset($deleted)) {
+		if ($deleted !== false) {
 			$params[] = $deleted;
 			$deletedSql = 'and n.deleted = ?';
 		}
@@ -221,8 +222,8 @@ class OwnNoteMapper extends Mapper {
 	 * @return bool
 	 */
 	public function deleteNote(OwnNote $note) {
-		$note->setDeleted(1);
-		parent::update($note);
+		$this->deleteNoteParts($note);
+		parent::delete($note);
 		return true;
 	}
 

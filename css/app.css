@@ -309,6 +309,12 @@ a.editable-empty:focus {
   .edit-note:hover {
     opacity: 1; }
 
+.restore-note {
+  background-image: url("../../../core/css/../img/actions/history.svg?v=1");
+  opacity: 0.3; }
+  .restore-note:hover {
+    opacity: 1; }
+
 .indent {
   margin-left: 10pt; }
 

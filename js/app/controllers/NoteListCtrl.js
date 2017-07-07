@@ -41,9 +41,19 @@
 			};
 
 			$scope.deleteNote = function (note) {
-				NoteService.getNoteById(note.id).then(function (note) {
-					note.$delete();
-					delete $rootScope.notes[note.id];
+				NoteService.getNoteById(note.id).then(function (_note) {
+					_note.$softDelete().then(function (result) {
+						$rootScope.notes[result.id] = result;
+                        note.deleted = 1;
+                    });
+				});
+			};
+			$scope.resotoreNote = function (note) {
+				NoteService.getNoteById(note.id).then(function (_note) {
+					_note.$restore().then(function (result) {
+						$rootScope.notes[result.id] = result;
+                        note.deleted = 0;
+                    });
 				});
 			};
 

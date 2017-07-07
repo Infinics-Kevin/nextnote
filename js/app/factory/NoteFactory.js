@@ -20,7 +20,7 @@
  *
  */
 
-angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
+angular.module('NextNotesApp').factory('NoteFactory', function($resource, $http) {
 	var notes = $resource(OC.generateUrl('apps/ownnote/api/v2.0/note') + '/:id', {id: '@id'},{
 		query:{
 			responseType: 'json',
@@ -39,9 +39,9 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
 		update: {
 			method: 'PUT'
 		},
-                create: {
- 			method: 'POST'
-                }
+        create: {
+            method: 'POST'
+        }
 	});
 
 	notes.prototype.$save = function() {
@@ -51,5 +51,16 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource) {
 			return this.$create();
 		}
 	};
+
+	notes.prototype.$softDelete = function () {
+		this.deleted = 1;
+		return this.$update()
+    };
+
+	notes.prototype.$restore= function () {
+		this.deleted = 0;
+		return this.$update()
+    };
+
 	return notes;
 });

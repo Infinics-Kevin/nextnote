@@ -95,7 +95,7 @@ class Ownnotev2ApiController extends ApiController {
 	 * @NoAdminRequired
 	 * @NoCSRFRequired
 	 */
-	public function update($id, $title, $grouping, $content) {
+	public function update($id, $title, $grouping, $content, $deleted) {
 		if($title == "" || !$title){
 			return new JSONResponse(['error' => 'title is missing']);
 		}
@@ -105,7 +105,8 @@ class Ownnotev2ApiController extends ApiController {
 			'title' => $title,
 			'name' => $title,
 			'grouping' => $grouping,
-			'note' => $content
+			'note' => $content,
+            'deleted' => $deleted
 		];
 
 		$entity = $this->noteService->find($id);
