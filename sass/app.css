@@ -230,7 +230,7 @@ a.editable-empty:focus {
     .listingSort tr > td.actions {
       width: 30%; }
     .listingSort tr > td.info {
-      width: 15%; }
+      width: 25%; }
 
 .listingBlank {
   height: 40pt;
@@ -273,7 +273,7 @@ a.editable-empty:focus {
 .modified {
   color: #A0A0A0;
   display: inline-block;
-  width: 35%; }
+  width: 100%; }
 
 .buttons {
   background-repeat: no-repeat;
@@ -309,12 +309,20 @@ a.editable-empty:focus {
   .edit-note:hover {
     opacity: 1; }
 
+.restore-note {
+  background-image: url("../../../core/css/../img/actions/history.svg?v=1");
+  opacity: 0.3; }
+  .restore-note:hover {
+    opacity: 1; }
+
 .indent {
   margin-left: 10pt; }
 
 .notesort {
   font-weight: normal;
   color: #A0A0A0; }
+  .notesort > span {
+    float: left; }
 
 .sortarrow {
   background-repeat: no-repeat;
@@ -548,10 +556,44 @@ a.editable-empty:focus {
     border-color: #204d74; }
 
 .icon-ok {
-  background-image: url("../../../core/css/../img/actions/checkmark-white.svg?v=2"); }
+  background-image: url("../../../core/img/actions/checkmark-white.svg?v=2"); }
 
 .icon-remove {
-  background-image: url("../../../core/css/../img/actions/close.svg?v=2"); }
+  background-image: url("../../../core/img/actions/close.svg?v=2"); }
+
+.ui-dialog.ui-widget[aria-describedby="mceNextcloudFileBrowser"] {
+  z-index: 99999; }
+
+#mceNextcloudFileBrowser {
+  background-color: #fff;
+  max-height: 500px !important; }
+  #mceNextcloudFileBrowser #currentDir {
+    margin-bottom: 5px;
+    font-weight: bold;
+    position: fixed;
+    background-color: #fff; }
+  #mceNextcloudFileBrowser #fileList {
+    list-style-type: none;
+    margin-top: 25px; }
+    #mceNextcloudFileBrowser #fileList li {
+      background-repeat: no-repeat;
+      background-size: 25px;
+      background-position-y: 10px;
+      line-height: 25px;
+      padding-left: 30px;
+      border-top: 1px solid #000;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      cursor: pointer; }
+      #mceNextcloudFileBrowser #fileList li.dir {
+        background-image: url("../../../core/img/filetypes/folder.svg?v=0"); }
+      #mceNextcloudFileBrowser #fileList li.file {
+        background-image: url("../../../core/img/filetypes/image.svg?v=0"); }
+      #mceNextcloudFileBrowser #fileList li.back {
+        background-image: url("../../../core/img/filetypes/folder.svg?v=0"); }
+
+.ui-button.ui-button-icon-only {
+  min-height: auto !important; }
 
 /*# sourceMappingURL=style.css.map */
 

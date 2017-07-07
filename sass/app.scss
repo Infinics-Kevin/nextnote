@@ -1,4 +1,5 @@
 @import "vendor/xeditable/_xeditable.scss";
+
 #app-content.content-with-sidebar {
   width: 60%;
 }
@@ -169,6 +170,7 @@
     opacity: 1;
   }
 }
+
 .restore-note {
   background-image: url('../../../core/css/../img/actions/history.svg?v=1');
   opacity: 0.3;
@@ -182,7 +184,7 @@
 }
 
 .notesort {
-  > span{
+  > span {
     float: left;
   }
   font-weight: normal;
@@ -215,8 +217,8 @@
   display: none;
 }
 
-#controls{
-  .autosave{
+#controls {
+  .autosave {
     font-size: 16px;
     line-height: 44px;
     height: 44px;
@@ -224,7 +226,7 @@
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 0.5s, opacity 0.5s linear;
-    &.shown{
+    &.shown {
       visibility: visible;
       opacity: 1;
       transition: opacity 0.5s linear;
@@ -438,6 +440,7 @@
     line-height: 32px;
   }
 }
+
 .mce-container {
   .mce-window-head {
     .mce-title {
@@ -451,6 +454,7 @@
     display: none;
   }
 }
+
 .nav-trashbin {
   bottom: 0;
   .nav-icon-trashbin {
@@ -462,24 +466,27 @@
     background-repeat: no-repeat;
   }
 }
+
 .editable-text {
   padding-left: 9px;
   width: 100%;
   padding-right: 9px;
-  input[type="text"]{
+  input[type="text"] {
     width: 130px !important;
   }
 }
-.btn{
-  &:hover{
+
+.btn {
+  &:hover {
     background-color: #e6e6e6;
     border-color: #adadad;
   }
   background-color: #fff;
   border-color: #ccc;
 }
-.btn-primary{
-  &:hover{
+
+.btn-primary {
+  &:hover {
     background-color: #286090;
     border-color: #204d74;
   }
@@ -487,14 +494,58 @@
   background-color: #337ab7;
   border-color: #2e6da4;
 }
-.icon-ok{
-  background-image:url('../../../core/css/../img/actions/checkmark-white.svg?v=2');
-}
-.icon-remove{
-  background-image:url('../../../core/css/../img/actions/close.svg?v=2');
+
+.icon-ok {
+  background-image: url('../../../core/img/actions/checkmark-white.svg?v=2');
 }
 
-.ui-dialog.ui-widget[aria-describedby="mceNextcloudFileBrowser"]{
+.icon-remove {
+  background-image: url('../../../core/img/actions/close.svg?v=2');
+}
+
+.ui-dialog.ui-widget[aria-describedby="mceNextcloudFileBrowser"] {
   z-index: 99999;
 }
+
+#mceNextcloudFileBrowser {
+  background-color: #fff;
+  max-height: 500px !important;
+  #currentDir {
+    margin-bottom: 5px;
+    font-weight: bold;
+    position: fixed;
+    background-color: #fff;
+  }
+  #fileList {
+    list-style-type: none;
+    margin-top: 25px;
+    li {
+      &.dir {
+        background-image: url('../../../core/img/filetypes/folder.svg?v=0');
+
+      }
+      &.file {
+        background-image: url('../../../core/img/filetypes/image.svg?v=0');
+      }
+      &.back {
+        background-image: url('../../../core/img/filetypes/folder.svg?v=0');
+      }
+      background-repeat: no-repeat;
+      background-size: 25px;
+      background-position-y: 10px;
+      line-height: 25px;
+      padding-left: 30px;
+      border-top: 1px solid #000;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      cursor: pointer;
+    }
+
+  }
+}
+
+.ui-button.ui-button-icon-only{
+  min-height: auto !important;
+}
+
 /*# sourceMappingURL=style.css.map */

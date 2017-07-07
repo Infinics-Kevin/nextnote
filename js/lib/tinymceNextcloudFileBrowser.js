@@ -1,22 +1,72 @@
 var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
-    var fileListUrl ='../files/ajax/list.php?dir=/';
-    function listDir(dir) {
-        $.get(fileListUrl, function (dirIndex) {
-            console.log('Dir index of' + dir +' ', dirIndex);
-        });
-    }
-    // Bestand tonen: remote.php/webdav/ $path
-    var browser = $('<div id="mceNextcloudFileBrowser" />');
-    browser.css('zIndex', 99999);
+	var fileListUrl = '../files/ajax/list.php?dir=';
+	var currentPath;
 
-    var btn = $('<div class="btn btn-success">Click me</div>');
-    btn.click(function () {
-        win.document.getElementById(field_name).value = 'my browser value';
-        browser.dialog('destroy');
-    });
-    btn.appendTo(browser);
-    browser.dialog({
-        title: 'Select a file from your Nextcloud'
-    });
-    //
+	function fileBrowserClickAction (file) {
+		console.log(file)
+		currentPath = (currentPath === '/' || currentPath === '') ? currentPath : currentPath + '/';
+		if (file.type === 'dir' || file.type === 'back') {
+			var newPath = (file.type === 'back') ? file.filename : currentPath + file.name;
+			listDir(newPath);
+			return;
+		}
+
+		if (file.type === 'file' && file.mimetype.indexOf('image') === 0) {
+			var filePath = currentPath + file.name;
+			var remotePath = OC.linkToRemote('webdav') + filePath;
+			win.document.getElementById(field_name).value = remotePath;
+			$('#mceNextcloudFileBrowser').dialog('destroy');
+		}
+	}
+
+
+	function listDir (dir) {
+		$.get(fileListUrl + dir, function (response) {
+			var $browser = $('#mceNextcloudFileBrowser');
+			var $fileList = $browser.find('#fileList');
+			$fileList.html('');
+			var files = response.data.files;
+			currentPath = response.data.directory;
+			$browser.find('#currentDir').html('Dir index of ' + currentPath);
+
+			if (currentPath !== '/') {
+				var path = currentPath.split('/');
+				delete path[path.length - 1];
+				files.unshift({
+					id: null,
+					filename: path.join('/'),
+					type: 'back',
+					name: 'Go back'
+				})
+			}
+
+			$.each(files, function (key, file) {
+				var row = $('<li data-type="' + file.type + '" class="' + file.type + '">' + file.name + '</li>');
+				row.click(function () {
+					fileBrowserClickAction(file)
+				});
+				row.appendTo($fileList);
+			})
+		});
+	}
+
+	// Bestand tonen: remote.php/webdav/ $path
+	var browser = $('<div id="mceNextcloudFileBrowser"><div id="currentDir"></div><ul id="fileList"></ul></div>');
+	browser.css('zIndex', 99999);
+
+	/*var btn = $('<div class="btn btn-success">Click me</div>');
+	 btn.click(function () {
+
+	 browser.dialog('destroy');
+	 });
+	 btn.appendTo(browser);*/
+	browser.dialog({
+		position: ['middle', 50],
+		title: 'Select a file from your Nextcloud',
+		create: function () {
+			$(browser).css("maxHeight", 500);
+		}
+	});
+	listDir('/')
+	//
 };
