@@ -109,6 +109,7 @@
 						}, 2500);
 					} else {
 						$location.path('/');
+						$rootScope.$emit('refresh_notes')
 					}
 				})
 			};

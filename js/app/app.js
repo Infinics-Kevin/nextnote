@@ -62,24 +62,29 @@
 		$rootScope.list_filter = {
 			deleted: 0
 		};
+		function loadNotes() {
+            NoteFactory.query(function (notes) {
+                console.log('Notes received', notes);
+                $rootScope.notes = notes;
+                $rootScope.$broadcast('nextnotes_notes_loaded');
+                $rootScope.keys = Object.keys;
 
-		NoteFactory.query(function (notes) {
-			console.log('Notes received', notes);
-			$rootScope.notes = notes;
-			$rootScope.$broadcast('nextnotes_notes_loaded');
-			$rootScope.keys = Object.keys;
-
-			// Fix nextcloud's behaviour because templates are injected with JS.
-			$rootScope.$on('$viewContentLoaded', function () {
-				$(window).trigger('resize');
-			});
-			$(window).trigger('resize');
+                // Fix nextcloud's behaviour because templates are injected with JS.
+                $rootScope.$on('$viewContentLoaded', function () {
+                    $(window).trigger('resize');
+                });
+                $(window).trigger('resize');
 
 
-			//Setup locale data
-			$rootScope.dateFormat = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y');
-			$rootScope.dateFormatLong = moment.localeData().longDateFormat('L').replace(/D/g,'d').replace(/Y/g,'y') + ' H:mm';
-		});
+                //Setup locale data
+                $rootScope.dateFormat = moment.localeData().longDateFormat('L').replace(/D/g, 'd').replace(/Y/g, 'y');
+                $rootScope.dateFormatLong = moment.localeData().longDateFormat('L').replace(/D/g, 'd').replace(/Y/g, 'y') + ' H:mm';
+            });
+        }
+        loadNotes();
+		$rootScope.$on('refresh_notes', function () {
+            loadNotes();
+        });
 
 
 		// Setup a watcher on the notes so groups are always correct
