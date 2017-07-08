@@ -50,16 +50,8 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 		});
 	}
 
-	// Bestand tonen: remote.php/webdav/ $path
 	var browser = $('<div id="mceNextcloudFileBrowser"><div id="currentDir"></div><ul id="fileList"></ul></div>');
 	browser.css('zIndex', 99999);
-
-	/*var btn = $('<div class="btn btn-success">Click me</div>');
-	 btn.click(function () {
-
-	 browser.dialog('destroy');
-	 });
-	 btn.appendTo(browser);*/
 	browser.dialog({
 		position: ['middle', 50],
 		title: 'Select a file from your Nextcloud',
