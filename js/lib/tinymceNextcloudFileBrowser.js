@@ -1,9 +1,9 @@
-var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
+var NextCloudFileBrowserDialogue = function(field_name, url, type, win) {
 	var fileListUrl = '../files/ajax/list.php?dir=';
 	var currentPath;
 
-	function fileBrowserClickAction (file) {
-		console.log(file)
+	function fileBrowserClickAction(file) {
+		console.log(file);
 		currentPath = (currentPath === '/' || currentPath === '') ? currentPath : currentPath + '/';
 		if (file.type === 'dir' || file.type === 'back') {
 			var newPath = (file.type === 'back') ? file.filename : currentPath + file.name;
@@ -20,8 +20,8 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 	}
 
 
-	function listDir (dir) {
-		$.get(fileListUrl + dir, function (response) {
+	function listDir(dir) {
+		$.get(fileListUrl + dir, function(response) {
 			var $browser = $('#mceNextcloudFileBrowser');
 			var $fileList = $browser.find('#fileList');
 			$fileList.html('');
@@ -37,16 +37,16 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 					filename: path.join('/'),
 					type: 'back',
 					name: 'Go back'
-				})
+				});
 			}
 
-			$.each(files, function (key, file) {
+			$.each(files, function(key, file) {
 				var row = $('<li data-type="' + file.type + '" class="' + file.type + '">' + file.name + '</li>');
-				row.click(function () {
-					fileBrowserClickAction(file)
+				row.click(function() {
+					fileBrowserClickAction(file);
 				});
 				row.appendTo($fileList);
-			})
+			});
 		});
 	}
 
@@ -55,13 +55,13 @@ var NextCloudFileBrowserDialogue = function (field_name, url, type, win) {
 	browser.dialog({
 		position: ['middle', 50],
 		title: 'Select a file from your Nextcloud',
-		create: function () {
-			$(browser).css("maxHeight", 500);
+		create: function() {
+			$(browser).css('maxHeight', 500);
 		},
-		close: function () {
+		close: function() {
 			$('#mceNextcloudFileBrowser').dialog('destroy');
 		}
 	});
-	listDir('/')
+	listDir('/');
 	//
 };
