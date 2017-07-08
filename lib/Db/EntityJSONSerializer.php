@@ -21,7 +21,7 @@
  *
  */
 
-namespace OCA\OwnNote\Db;
+namespace OCA\NextNote\Db;
 trait EntityJSONSerializer {
 	public function serializeFields($properties) {
 		$result = [];

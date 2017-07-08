@@ -21,11 +21,11 @@
  *
  */
 
-\OCP\Util::addScript('ownnote', 'admin');
+\OCP\Util::addScript('nextnote', 'admin');
 
 $folder = $_['folder'];
 $sharemode = $_['sharemode'];
-$l = OCP\Util::getL10N('ownnote');
+$l = OCP\Util::getL10N('nextnote');
 
 ?>
 

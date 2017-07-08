@@ -21,7 +21,7 @@
  *
  */
 
-namespace OCA\OwnNote\AppInfo;
+namespace OCA\NextNote\AppInfo;
 
 /**
  * Create your routes in here. The name is the lowercase name of the controller

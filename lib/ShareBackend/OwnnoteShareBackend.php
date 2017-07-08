@@ -21,7 +21,7 @@
  *
  */
 
-namespace OCA\OwnNote\ShareBackend;
+namespace OCA\NextNote\ShareBackend;
 
 use \OCP\Share_Backend;
 

@@ -21,9 +21,9 @@
  *
  */
 
-namespace OCA\OwnNote\Db;
+namespace OCA\NextNote\Db;
 
-use \OCA\OwnNote\Utility\Utils;
+use \OCA\NextNote\Utility\Utils;
 use OCP\AppFramework\Db\Entity;
 use OCP\IDBConnection;
 use OCP\AppFramework\Db\Mapper;

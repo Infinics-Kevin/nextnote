@@ -21,11 +21,11 @@
  *
  */
 
-namespace OCA\OwnNote\Service;
+namespace OCA\NextNote\Service;
 
-use OCA\OwnNote\Db\OwnNote;
-use OCA\OwnNote\Utility\Utils;
-use OCA\OwnNote\Db\OwnNoteMapper;
+use OCA\NextNote\Db\OwnNote;
+use OCA\NextNote\Utility\Utils;
+use OCA\NextNote\Db\OwnNoteMapper;
 
 
 class OwnNoteService {
@@ -176,7 +176,7 @@ class OwnNoteService {
 		}
 
 		// check share permissions
-		$shared_note = \OCP\Share::getItemSharedWith('ownnote', $nid, 'populated_shares')[0];
+		$shared_note = \OCP\Share::getItemSharedWith('nextnote', $nid, 'populated_shares')[0];
 		return $shared_note['permissions'] & $permission;
 	}
 }

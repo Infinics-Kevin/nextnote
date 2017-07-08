@@ -20,15 +20,15 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-namespace OCA\OwnNote\AppInfo;
+namespace OCA\NextNote\AppInfo;
 
 use OC\Files\View;
 
 
-use OCA\OwnNote\Controller\OwnnoteAjaxController;
-use OCA\OwnNote\Controller\OwnnoteApiController;
-use OCA\OwnNote\Controller\OwnnoteSharesController;
-use OCA\OwnNote\Controller\PageController;
+use OCA\NextNote\Controller\OwnnoteAjaxController;
+use OCA\NextNote\Controller\OwnnoteApiController;
+use OCA\NextNote\Controller\OwnnoteSharesController;
+use OCA\NextNote\Controller\PageController;
 use OCP\IConfig;
 use OCP\IDBConnection;
 
@@ -38,7 +38,7 @@ use OCP\Util;
 
 class Application extends App {
 	public function __construct() {
-		parent::__construct('ownnote');
+		parent::__construct('nextnote');
 		$container = $this->getContainer();
 		// Allow automatic DI for the View, until we migrated to Nodes API
 		$container->registerService(View::class, function () {
@@ -109,7 +109,7 @@ class Application extends App {
 				'id' => $c->getAppName(),
 				'order' => 10,
 				'name' => $c->query(IL10N::class)->t('Notes'),
-				'href' => $server->getURLGenerator()->linkToRoute('ownnote.page.index'),
+				'href' => $server->getURLGenerator()->linkToRoute('nextnote.page.index'),
 				'icon' => $server->getURLGenerator()->imagePath($c->getAppName(), 'app.svg'),
 			];
 		};

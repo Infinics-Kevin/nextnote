@@ -21,11 +21,11 @@
  *
  */
 
-namespace OCA\OwnNote\Service;
+namespace OCA\NextNote\Service;
 
-use OCA\OwnNote\Db\OwnNote;
-use OCA\OwnNote\Utility\Utils;
-use OCA\OwnNote\Db\OwnNoteMapper;
+use OCA\NextNote\Db\OwnNote;
+use OCA\NextNote\Utility\Utils;
+use OCA\NextNote\Db\OwnNoteMapper;
 
 
 class OwnNoteGroupService {

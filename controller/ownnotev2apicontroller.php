@@ -21,16 +21,16 @@
  *
  */
 
-namespace OCA\OwnNote\Controller;
+namespace OCA\NextNote\Controller;
 
-use OCA\OwnNote\Service\OwnNoteService;
-use OCA\OwnNote\Utility\NotFoundJSONResponse;
+use OCA\NextNote\Service\OwnNoteService;
+use OCA\NextNote\Utility\NotFoundJSONResponse;
 use \OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\ILogger;
 use \OCP\IRequest;
-use \OCA\OwnNote\Lib\Backend;
+use \OCA\NextNote\Lib\Backend;
 
 
 class Ownnotev2ApiController extends ApiController {
