@@ -28,7 +28,7 @@ use OCP\AppFramework\Db\Entity;
 use OCP\IDBConnection;
 use OCP\AppFramework\Db\Mapper;
 
-class OwnNoteMapper extends Mapper {
+class NextNoteMapper extends Mapper {
 	private $utils;
 	private $maxNoteFieldLength = 2621440;
 
@@ -42,7 +42,7 @@ class OwnNoteMapper extends Mapper {
      * @param $note_id
      * @param null $user_id
      * @param int|bool $deleted
-     * @return OwnNote if not found
+     * @return NextNote if not found
      */
 	public function find($note_id, $user_id = null, $deleted = false) {
 		$params = [$note_id];
@@ -60,7 +60,7 @@ class OwnNoteMapper extends Mapper {
 		$results = [];
 		foreach ($this->execute($sql, $params)->fetchAll() as $item) {
 			/**
-			 * @var $note OwnNote
+			 * @var $note NextNote
 			 */
 			$note = $this->makeEntityFromDBResult($item);
 			$results[] = $note;
@@ -73,7 +73,7 @@ class OwnNoteMapper extends Mapper {
 	 * @param $userId
 	 * @param int|bool $deleted
 	 * @param string|bool $group
-	 * @return OwnNote[] if not found
+	 * @return NextNote[] if not found
 	 */
 	public function findNotesFromUser($userId, $deleted = 0, $group = false) {
 		$params = [$userId];
@@ -91,7 +91,7 @@ class OwnNoteMapper extends Mapper {
 		$results = [];
 		foreach ($this->execute($sql, $params)->fetchAll() as $item) {
 			/**
-			 * @var $note OwnNote
+			 * @var $note NextNote
 			 */
 			$note = $this->makeEntityFromDBResult($item);
 			$results[] = $note;
@@ -102,7 +102,7 @@ class OwnNoteMapper extends Mapper {
 	/**
 	 * @throws \OCP\AppFramework\Db\DoesNotExistException if not found
 	 * @throws \OCP\AppFramework\Db\MultipleObjectsReturnedException if more than one result
-	 * @return OwnNote[]
+	 * @return NextNote[]
 	 */
 	public function findNotesByGroup($group, $userId) {
 		$params = [$group];
@@ -114,7 +114,7 @@ class OwnNoteMapper extends Mapper {
 		$sql = "SELECT n.uid, n.id, n.name, n.grouping, n.shared, n.mtime, n.deleted, p.pid, GROUP_CONCAT(p.note SEPARATOR '') as note FROM *PREFIX*ownnote n INNER JOIN *PREFIX*ownnote_parts p ON n.id = p.id WHERE n.deleted = 0 $uidSql and n.grouping = ? GROUP BY p.id";
 		$results = [];
 		foreach ($this->execute($sql, $params)->fetchAll() as $item) {
-			$note = new OwnNote();
+			$note = new NextNote();
 			$note->setId($item['id']);
 			$note->setName($item['name']);
 			$note->setGrouping($item['grouping']);
@@ -130,8 +130,8 @@ class OwnNoteMapper extends Mapper {
 	/**
 	 * Creates a note
 	 *
-	 * @param OwnNote $note
-	 * @return OwnNote|Entity
+	 * @param NextNote $note
+	 * @return NextNote|Entity
 	 * @internal param $userId
 	 */
 	public function create($note) {
@@ -144,7 +144,7 @@ class OwnNoteMapper extends Mapper {
 
 		$note->setShared(false);
 		/**
-		 * @var $note OwnNote
+		 * @var $note NextNote
 		 */
 		$note = parent::insert($note);
 
@@ -162,8 +162,8 @@ class OwnNoteMapper extends Mapper {
 	/**
 	 * Update note
 	 *
-	 * @param OwnNote $note
-	 * @return OwnNote|Entity
+	 * @param NextNote $note
+	 * @return NextNote|Entity
 	 */
 	public function updateNote($note) {
 		$len = mb_strlen($note->getNote());
@@ -175,7 +175,7 @@ class OwnNoteMapper extends Mapper {
 			$note->setNote('');
 		}
 		/**
-		 * @var $note OwnNote
+		 * @var $note NextNote
 		 */
 		$note = parent::update($note);
 		if ($parts) {
@@ -188,10 +188,10 @@ class OwnNoteMapper extends Mapper {
 	}
 
 	/**
-	 * @param OwnNote $note
+	 * @param NextNote $note
 	 * @param $content
 	 */
-	public function createNotePart(OwnNote $note, $content) {
+	public function createNotePart(NextNote $note, $content) {
 		$sql = "INSERT INTO *PREFIX*ownnote_parts VALUES (NULL, ?, ?);";
 		$this->execute($sql, array($note->getId(), $content));
 	}
@@ -199,9 +199,9 @@ class OwnNoteMapper extends Mapper {
 	/**
 	 * Delete the note parts
 	 *
-	 * @param OwnNote $note
+	 * @param NextNote $note
 	 */
-	public function deleteNoteParts(OwnNote $note) {
+	public function deleteNoteParts(NextNote $note) {
 		$sql = 'DELETE FROM *PREFIX*ownnote_parts where id = ?';
 		$this->execute($sql, array($note->getId()));
 	}
@@ -209,19 +209,19 @@ class OwnNoteMapper extends Mapper {
 	/**
 	 * Get the note parts
 	 *
-	 * @param OwnNote $note
+	 * @param NextNote $note
 	 * @return array
 	 */
-	public function getNoteParts(OwnNote $note) {
+	public function getNoteParts(NextNote $note) {
 		$sql = 'SELECT * from *PREFIX*ownnote_parts where id = ?';
 		return $this->execute($sql, array($note->getId()))->fetchAll();
 	}
 
 	/**
-	 * @param OwnNote $note
+	 * @param NextNote $note
 	 * @return bool
 	 */
-	public function deleteNote(OwnNote $note) {
+	public function deleteNote(NextNote $note) {
 		$this->deleteNoteParts($note);
 		parent::delete($note);
 		return true;
@@ -229,10 +229,10 @@ class OwnNoteMapper extends Mapper {
 
 	/**
 	 * @param $arr
-	 * @return OwnNote
+	 * @return NextNote
 	 */
 	public function makeEntityFromDBResult($arr) {
-		$note = new OwnNote();
+		$note = new NextNote();
 		$note->setId($arr['id']);
 		$note->setName($arr['name']);
 		$note->setGrouping($arr['grouping']);

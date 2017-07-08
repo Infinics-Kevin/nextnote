@@ -31,5 +31,5 @@ require_once __DIR__ . '/autoload.php';
 $app = new Application(); // \AppInfo\Application();
 $app->registerNavigationEntry();
 
-\OCP\Share::registerBackend ('nextnote', '\OCA\NextNote\ShareBackend\OwnnoteShareBackend');
+\OCP\Share::registerBackend ('nextnote', '\OCA\NextNote\ShareBackend\NextNoteShareBackend');
 \OCP\App::registerAdmin('nextnote', 'admin');

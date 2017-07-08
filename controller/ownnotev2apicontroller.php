@@ -23,7 +23,7 @@
 
 namespace OCA\NextNote\Controller;
 
-use OCA\NextNote\Service\OwnNoteService;
+use OCA\NextNote\Service\NextNoteService;
 use OCA\NextNote\Utility\NotFoundJSONResponse;
 use \OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
@@ -38,7 +38,7 @@ class Ownnotev2ApiController extends ApiController {
 	private $config;
 	private $noteService;
 
-	public function __construct($appName, IRequest $request, ILogger $logger, IConfig $config, OwnNoteService $noteService) {
+	public function __construct($appName, IRequest $request, ILogger $logger, IConfig $config, NextNoteService $noteService) {
 		parent::__construct($appName, $request);
 		$this->config = $config;
 		$this->noteService = $noteService;
