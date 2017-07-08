@@ -35,6 +35,7 @@ Did you found a bug? Report it or fix it and send a PR.
 - [ ] Add markdown support
 - [ ] Import from [Notes](https://github.com/nextcloud/notes) app.
 - [ ] Switch between database or file mode
+- [ ] Add admin section for allowed image / video domains due CSP.
 - [ ] Encrypted notes? (What about sharing?)
 - [ ] Travis tests (We really need help with this, so PR's welcome!)   
    
