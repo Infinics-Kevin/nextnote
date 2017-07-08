@@ -20,7 +20,7 @@
  *
  */
 
-(function () {
+(function() {
 	'use strict';
 
 	/**
@@ -31,7 +31,7 @@
 	 * Controller of the passmanApp
 	 */
 	angular.module('NextNotesApp')
-		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', '$timeout', 'NoteFactory', function ($scope, $rootScope, NoteService, $routeParams, $location, $timeout, NoteFactory) {
+		.controller('NoteEditCtrl', ['$scope', '$rootScope', 'NoteService', '$routeParams', '$location', '$timeout', 'NoteFactory', function($scope, $rootScope, NoteService, $routeParams, $location, $timeout, NoteFactory) {
 			$scope.noteShadowCopy = {
 				title: '',
 				content: ''
@@ -41,7 +41,7 @@
 
 			var noteId = ($routeParams.noteId) ? $routeParams.noteId : null;
 			if (noteId) {
-				NoteService.getNoteById(noteId).then(function (note) {
+				NoteService.getNoteById(noteId).then(function(note) {
 					$scope.note = note;
 					$scope.noteShadowCopy = angular.copy(note);
 				});
@@ -61,7 +61,7 @@
 					'insertdatetime media nonbreaking save table contextmenu directionality',
 					'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help bdesk_photo'
 				],
-				extended_valid_elements: "form[name|id|action|method|enctype|accept-charset|onsubmit|onreset|target],input[id|name|type|value|size|maxlength|checked|accept|src|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],textarea[id|name|rows|cols|maxlength|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],option[name|id|value|selected|style],select[id|name|type|value|size|maxlength|checked|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|multiple|style]",
+				extended_valid_elements: 'form[name|id|action|method|enctype|accept-charset|onsubmit|onreset|target],input[id|name|type|value|size|maxlength|checked|accept|src|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],textarea[id|name|rows|cols|maxlength|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|onkeyup|onkeydown|required|style],option[name|id|value|selected|style],select[id|name|type|value|size|maxlength|checked|width|height|disabled|readonly|tabindex|accesskey|onfocus|onblur|onchange|onselect|onclick|multiple|style]',
 				toolbar1: 'print | undo redo | styleselect | bold italic strikethrough | forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media bdesk_photo | codesample help | code ',
 				image_advtab: true,
 				allow_html_data_urls: true,
@@ -89,52 +89,52 @@
 			};
 
 			$scope.autoSaved = false;
-			$scope.saveNote = function (autoSave) {
-				if(autoSaveTimer){
+			$scope.saveNote = function(autoSave) {
+				if (autoSaveTimer) {
 					$timeout.cancel(autoSaveTimer);
 				}
-				if(!$scope.noteShadowCopy.title){
+				if (!$scope.noteShadowCopy.title) {
 					return;
 				}
 
-				if($scope.noteShadowCopy.grouping === '_new' && $scope.new_group !== ''){
+				if ($scope.noteShadowCopy.grouping === '_new' && $scope.new_group !== '') {
 					$scope.noteShadowCopy.grouping = angular.copy($scope.new_group);
 				}
 
-				$scope.noteShadowCopy.$save().then(function (result) {
+				$scope.noteShadowCopy.$save().then(function(result) {
 					result.mtime = result.mtime * 1000;
 					$rootScope.notes[result.id] = result;
-					if(autoSave){
+					if (autoSave) {
 						$scope.autoSaved = true;
-						$timeout(function () {
+						$timeout(function() {
 							$scope.autoSaved = false;
 						}, 2500);
 					} else {
 						$location.path('/');
-						$rootScope.$emit('refresh_notes')
+						$rootScope.$emit('refresh_notes');
 					}
-				})
+				});
 			};
 
 			var autoSaveTimer;
 			var initialSave = true;
-			$scope.$watch('[noteShadowCopy.title, noteShadowCopy.content]', function () {
-				if(autoSaveTimer){
+			$scope.$watch('[noteShadowCopy.title, noteShadowCopy.content]', function() {
+				if (autoSaveTimer) {
 					$timeout.cancel(autoSaveTimer);
 				}
-				if($scope.noteShadowCopy.title && $scope.noteShadowCopy.title !== "") {
-					if(initialSave){
+				if ($scope.noteShadowCopy.title && $scope.noteShadowCopy.title !== '') {
+					if (initialSave) {
 						initialSave = false;
 						return;
 					}
-					autoSaveTimer = $timeout(function () {
+					autoSaveTimer = $timeout(function() {
 						$scope.saveNote(true);
 					}, 15000);
 				}
 			});
 
-			$scope.cancelEdit = function () {
+			$scope.cancelEdit = function() {
 				$location.path('/');
-			}
+			};
 		}]);
 }());

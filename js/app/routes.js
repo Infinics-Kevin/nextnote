@@ -20,7 +20,7 @@
  *
  */
 
-(function () {
+(function() {
 
 	'use strict';
 
@@ -32,7 +32,7 @@
 	 *
 	 * Defines routes for the application
 	 */
-	angular.module('NextNotesApp').config(function ($routeProvider) {
+	angular.module('NextNotesApp').config(function($routeProvider) {
 		$routeProvider
 			.when('/', {
 				templateUrl: 'views/list.html',

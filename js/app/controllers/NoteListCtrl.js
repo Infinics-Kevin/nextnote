@@ -20,7 +20,7 @@
  *
  */
 
-(function () {
+(function() {
 	'use strict';
 
 	/**
@@ -31,34 +31,34 @@
 	 * List Controller
 	 */
 	angular.module('NextNotesApp')
-		.controller('NoteListCtrl', ['$scope', '$rootScope', '$location', 'NoteService', function ($scope, $rootScope, $location, NoteService) {
-			$scope.editNote = function (note) {
-				$location.path('/note/edit/' + note.id)
+		.controller('NoteListCtrl', ['$scope', '$rootScope', '$location', 'NoteService', function($scope, $rootScope, $location, NoteService) {
+			$scope.editNote = function(note) {
+				$location.path('/note/edit/' + note.id);
 			};
 
-			$scope.newNote = function (note) {
-				$location.path('/note/new')
+			$scope.newNote = function(note) {
+				$location.path('/note/new');
 			};
 
-			$scope.deleteNote = function (note) {
-				NoteService.getNoteById(note.id).then(function (_note) {
-					_note.$softDelete().then(function (result) {
+			$scope.deleteNote = function(note) {
+				NoteService.getNoteById(note.id).then(function(_note) {
+					_note.$softDelete().then(function(result) {
 						$rootScope.notes[result.id] = result;
                         note.deleted = 1;
                     });
 				});
 			};
-			$scope.resotoreNote = function (note) {
-				NoteService.getNoteById(note.id).then(function (_note) {
-					_note.$restore().then(function (result) {
+			$scope.resotoreNote = function(note) {
+				NoteService.getNoteById(note.id).then(function(_note) {
+					_note.$restore().then(function(result) {
 						$rootScope.notes[result.id] = result;
                         note.deleted = 0;
                     });
 				});
 			};
 
-			var init = function () {
-				var locaList = $.map(angular.copy($rootScope.notes), function (value, index) {
+			var init = function() {
+				var locaList = $.map(angular.copy($rootScope.notes), function(value, index) {
 					if (typeof value === 'object' && value.hasOwnProperty('id')) {
 						return [value];
 					}
@@ -69,11 +69,11 @@
 				init();
 			}
 
-			$rootScope.$on('nextnotes_notes_loaded', function () {
+			$rootScope.$on('nextnotes_notes_loaded', function() {
 				init();
 			});
 
-			$scope.changeOrder = function () {
+			$scope.changeOrder = function() {
 				console.log('change order');
 				vm.orderReverse = !vm.orderReverse;
 				vm.items = $filter('orderBy')(vm.items, 'name', vm.orderReverse);

@@ -22,18 +22,18 @@
 
 angular.module('NextNotesApp').factory('NoteFactory', function($resource, $http) {
 	var notes = $resource(OC.generateUrl('apps/ownnote/api/v2.0/note') + '/:id', {id: '@id'},{
-		query:{
+		query: {
 			responseType: 'json',
-			transformResponse: function (result) {
+			transformResponse: function(result) {
 				var notes = {};
-				for(var k in result){
-					if(result.hasOwnProperty(k) && !isNaN(k)){
+				for (var k in result) {
+					if (result.hasOwnProperty(k) && !isNaN(k)) {
 						var note = result[k];
 						note.mtime = note.mtime * 1000; //Covert the modified time to javascript timestamps
 						notes[note.id] = note;
 					}
 				}
-				return notes
+				return notes;
 			}
 		},
 		update: {
@@ -52,14 +52,14 @@ angular.module('NextNotesApp').factory('NoteFactory', function($resource, $http)
 		}
 	};
 
-	notes.prototype.$softDelete = function () {
+	notes.prototype.$softDelete = function() {
 		this.deleted = 1;
-		return this.$update()
+		return this.$update();
     };
 
-	notes.prototype.$restore= function () {
+	notes.prototype.$restore = function() {
 		this.deleted = 0;
-		return this.$update()
+		return this.$update();
     };
 
 	return notes;

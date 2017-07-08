@@ -19,7 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-(function () {
+(function() {
 	'use strict';
 	/**
 	 * @ngdoc service
@@ -29,7 +29,7 @@
 	 * Service in the NextNotesApp.
 	 */
 	angular.module('NextNotesApp')
-		.service('NoteService', ['$rootScope', 'NoteFactory', '$timeout', '$q', function ($rootScope, NoteFactory, $timeout, $q) {
+		.service('NoteService', ['$rootScope', 'NoteFactory', '$timeout', '$q', function($rootScope, NoteFactory, $timeout, $q) {
 			var newNoteTemplate = {
 				'title': '',
 				'content': '',
@@ -37,18 +37,18 @@
 			};
 
 			return {
-				newNote: function () {
+				newNote: function() {
 					return angular.copy(newNoteTemplate);
 				},
-				getNoteById: function (noteId) {
+				getNoteById: function(noteId) {
 					noteId = parseInt(noteId);
 					var deferred = $q.defer();
 					if ($rootScope.notes && $rootScope.notes.hasOwnProperty(noteId)) {
 						deferred.resolve(new NoteFactory($rootScope.notes[noteId]));
 					} else {
-						NoteFactory.get({id: noteId}, function (note) {
+						NoteFactory.get({id: noteId}, function(note) {
 							$rootScope.notes[note.id] = note;
-							deferred.resolve(note)
+							deferred.resolve(note);
 						});
 					}
 					return deferred.promise;

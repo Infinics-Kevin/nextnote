@@ -1,4 +1,3 @@
-
 /**
  * Nextcloud - NextNotes
  *
@@ -21,21 +20,21 @@
  *
  */
 
-angular.module('NextNotesApp').filter('noteGroupFilter',['$filter', function($filter) {
-	return function( items, filterBy) {
+angular.module('NextNotesApp').filter('noteGroupFilter', ['$filter', function ($filter) {
+	return function (items, filterBy) {
 		var filtered = [];
-		if(filterBy.hasOwnProperty('grouping') && filterBy.grouping === 'all'){
+		if (filterBy.hasOwnProperty('grouping') && filterBy.grouping === 'all') {
 			return items;
 		}
-		if(filterBy.hasOwnProperty('grouping') && filterBy.grouping === ''){
+		if (filterBy.hasOwnProperty('grouping') && filterBy.grouping === '') {
 			angular.forEach(items, function (item) {
-				if(item.grouping === ''){
+				if (item.grouping === '') {
 					filtered.push(item);
 				}
 			});
 			return filtered;
 		}
 
-		return  $filter('filter')(items,{grouping: filterBy.grouping});
+		return $filter('filter')(items, {grouping: filterBy.grouping});
 	};
 }]);

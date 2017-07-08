@@ -20,7 +20,7 @@
  *
  */
 
-(function () {
+(function() {
 	'use strict';
 
 	/**
@@ -44,12 +44,12 @@
 			'yaru22.angular-timeago',
 			'xeditable'
 		])
-		.config(['$httpProvider', function ($httpProvider) {
+		.config(['$httpProvider', function($httpProvider) {
 		/** global: oc_requesttoken */
 		$httpProvider.defaults.headers.common.requesttoken = oc_requesttoken;
-	}]).config(['$qProvider', function ($qProvider) {
+	}]).config(['$qProvider', function($qProvider) {
 		$qProvider.errorOnUnhandledRejections(false);
-	}]).run(['$rootScope', 'NoteFactory', 'editableOptions', function ($rootScope, NoteFactory, editableOptions) {
+	}]).run(['$rootScope', 'NoteFactory', 'editableOptions', function($rootScope, NoteFactory, editableOptions) {
 		editableOptions.theme = 'bs2';
 		console.log('App loaded');
 		$rootScope.list_sorting = {
@@ -63,14 +63,14 @@
 			deleted: 0
 		};
 		function loadNotes() {
-            NoteFactory.query(function (notes) {
+            NoteFactory.query(function(notes) {
                 console.log('Notes received', notes);
                 $rootScope.notes = notes;
                 $rootScope.$broadcast('nextnotes_notes_loaded');
                 $rootScope.keys = Object.keys;
 
                 // Fix nextcloud's behaviour because templates are injected with JS.
-                $rootScope.$on('$viewContentLoaded', function () {
+                $rootScope.$on('$viewContentLoaded', function() {
                     $(window).trigger('resize');
                 });
                 $(window).trigger('resize');
@@ -82,7 +82,7 @@
             });
         }
         loadNotes();
-		$rootScope.$on('refresh_notes', function () {
+		$rootScope.$on('refresh_notes', function() {
             loadNotes();
         });
 
@@ -90,16 +90,16 @@
 		// Setup a watcher on the notes so groups are always correct
 		// @TODO Implement multi level support
 		$rootScope.note_groups = [];
-		$rootScope.$watch('notes', function (n) {
-			if(!n){
+		$rootScope.$watch('notes', function(n) {
+			if (!n) {
 				return;
 			}
 
 			var notes = $rootScope.notes;
-			angular.forEach(notes, function (note) {
-				if(note.hasOwnProperty('id')){
+			angular.forEach(notes, function(note) {
+				if (note.hasOwnProperty('id')) {
 					var idx = $rootScope.note_groups.indexOf(note.grouping);
-					if(shareMode === 'merge' && idx === -1 && note.grouping !== "_new" && note.grouping !== ""){
+					if (shareMode === 'merge' && idx === -1 && note.grouping !== '_new' && note.grouping !== '') {
 						$rootScope.note_groups.push(note.grouping);
 					}
 				}
