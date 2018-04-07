@@ -49,11 +49,20 @@ There is a [Telegram](https://t.me/NextNote) chatroom available.
 - Place this app in **nextcloud/apps/nextnote** (Rename the extracted ZIP to "nextnote" or you will receive errors)
 - Note: *custom_csp_policy* changes are no longer required
 
-#### Scripted installation
+#### Scripted installation (Ubuntu 16.04)
 
 You can also use this script developed by [enoch85](https://github.com/enoch85):
 ```
 #!/bin/bash
+
+# Install git if not existing
+if [ "$(dpkg-query -W -f='${Status}' "git" 2>/dev/null | grep -c "ok installed")" == "1" ]
+then
+    sleep 0.1
+else
+    apt update -q4
+    apt install curl -y
+fi
 
 pull() {
 cd /var/www/nextcloud/apps || exit
